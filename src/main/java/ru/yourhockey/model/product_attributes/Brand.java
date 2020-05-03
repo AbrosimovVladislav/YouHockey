@@ -2,7 +2,6 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import static ru.yourhockey.model.product_attributes.Brand.BRAND_TABLE;
 @Data
 @Entity
 @Table(name = BRAND_TABLE)
-@EqualsAndHashCode
 public class Brand {
     public static final String BRAND_TABLE = "brand";
     public static final String BRAND_ID = "brand_id";
