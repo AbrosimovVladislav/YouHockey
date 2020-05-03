@@ -18,4 +18,8 @@ public class ShopService {
     public Shop update(Shop shop) {
         return shopRepo.saveAndFlush(shop);
     }
+
+    public Shop getByName(String name) {
+        return shopRepo.findByName(name);
+    }
 }

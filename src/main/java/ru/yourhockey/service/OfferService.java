@@ -22,4 +22,12 @@ public class OfferService {
     public Double calculateMinPriceByProduct(Long productId) {
         return offerRepo.calculateMinPriceByProduct(productId);
     }
+
+    public List<Offer> saveAll(List<Offer> offers){
+        return offerRepo.saveAll(offers);
+    }
+
+    public void deleteAll(){
+        offerRepo.deleteAll();
+    }
 }

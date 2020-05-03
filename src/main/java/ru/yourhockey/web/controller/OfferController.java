@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.service.OfferService;
+import ru.yourhockey.web.dto.OfferDto;
+import ru.yourhockey.web.mapper.OfferMapper;
 import ru.yourhockey.web.validation.RequestParamsValidator;
 import ru.yourhockey.web.webentities.FilterAndPageable;
 
@@ -23,6 +23,7 @@ public class OfferController {
 
     private final OfferService offerService;
     private final RequestParamsValidator validator;
+    private final OfferMapper offerMapper;
 
     private static final int DEFAULT_PAGE_NUMBER = 0;
     private static final int DEFAULT_PAGE_SIZE = 10;
@@ -45,6 +46,14 @@ public class OfferController {
         return offerService.getAllByParameters(pairOfParamsAndPageable.getFilter(),
                 pairOfParamsAndPageable.getPageable()
         );
+    }
+
+    @PostMapping(value = "/offers")
+    public ResponseEntity<List<OfferDto>> receiveFinalOffers(@RequestBody List<OfferDto> body) {
+        List<Offer> offers = offerMapper.mapToOffer(body);
+        offerService.deleteAll();
+        List<Offer> savedOffers = offerService.saveAll(offers);
+        return ResponseEntity.ok(offerMapper.mapToOfferDto(savedOffers));
     }
 
 }

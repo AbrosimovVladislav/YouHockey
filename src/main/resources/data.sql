@@ -45,7 +45,7 @@ VALUES ('Новое','STICK',  4, 'VAPOR FLYLITE Griptac Stick Intermediate', 'b
 INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
 VALUES ('Новое','STICK',  5, 'VAPOR 2X PRO Griptac Stick Senior', 'black/red', '440 grams (62"), 425 grams (60"), High Performance mold', 1);;
 
-INSERT INTO shop (name, website) VALUES ('shop-name1', 'www.com.1');;
+INSERT INTO shop (name, website) VALUES ('HOCKEYBEZGRANIC', 'www.com.1');;
 INSERT INTO shop (name, website) VALUES ('shop-name2', 'www.com.2');;
 
 -- -----------------------------------------------------------------------------------------------------------------------

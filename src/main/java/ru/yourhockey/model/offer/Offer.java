@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.shop.Shop;
@@ -19,6 +20,7 @@ import static ru.yourhockey.model.shop.Shop.SHOP_ID;
 @Entity
 @Table(name = Offer.OFFER_TABLE)
 @NoArgsConstructor
+@Accessors(chain = true)
 @Getter
 @Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
