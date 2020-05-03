@@ -26,7 +26,6 @@ public class Product implements BasicEntity {
     public static final String PRODUCT_TABLE = "product";
     public static final String PRODUCT_MODEL = "model";
     public static final String PRODUCT_ID = "productId";
-    public static final String PRODUCT_WEIGHT = "weight";
     public static final String PRODUCT_DTYPE = "dtype";
     public static final String PRODUCT_INFO = "info";
     public static final String PRODUCT_LINK = "link";

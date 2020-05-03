@@ -7,7 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.service.ProductService;
+import ru.yourhockey.web.dto.MatcherProductDto;
 import ru.yourhockey.web.dto.ProductDto;
+import ru.yourhockey.web.mapper.MatcherProductMapper;
 import ru.yourhockey.web.mapper.ProductMapper;
 import ru.yourhockey.web.validation.RequestParamsValidator;
 import ru.yourhockey.web.webentities.FilterAndPageable;
@@ -23,6 +25,7 @@ public class ProductController {
     private final ProductService productService;
     private final RequestParamsValidator validator;
     private final ProductMapper productMapper;
+    private final MatcherProductMapper matcherProductMapper;
 
     private static final int DEFAULT_PAGE_NUMBER = 0;
     private static final int DEFAULT_PAGE_SIZE = 10;
@@ -38,6 +41,13 @@ public class ProductController {
                 pairOfParamsAndPageable.getPageable()
         );
         return products.stream().map(productMapper::map).collect(Collectors.toList());
+    }
+
+    //ToDo переделать в один контроллер с сущностью с динамическим наполнением полей (см SimCardInfo в BEP)
+    @GetMapping(value = "/matcherProducts", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<MatcherProductDto> getAll(){
+        List<Product> products = productService.getAll();
+        return matcherProductMapper.mapList(products);
     }
 
     @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

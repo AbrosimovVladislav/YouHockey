@@ -19,6 +19,10 @@ public class ProductService {
         return productRepo.findAllByParameters(requestParams, pageable, Product.class);
     }
 
+    public List<Product> getAll(){
+        return productRepo.findAll();
+    }
+
     public Product getById(long id) {
         return productRepo.getOne(id);
     }

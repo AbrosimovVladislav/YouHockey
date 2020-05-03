@@ -1,9 +1,9 @@
 package ru.yourhockey.repo.searchProductRepo;
 
-import io.gunmarket.demo.marketApp.model.domain.product.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import ru.yourhockey.model.product.Product;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,9 +19,9 @@ public class SearchProductRepoImpl implements SearchProductRepo {
 
     @Override
     public List<Product> searchByQuery(String query) {
-        String resultQuery = "%"+query+"%";
+        String resultQuery = "%" + query + "%";
         return (List<Product>) entityManager.createQuery("SELECT p FROM Product p WHERE p.model LIKE :query")
-                .setParameter("query",resultQuery)
+                .setParameter("query", resultQuery)
                 .getResultList();
     }
 }
