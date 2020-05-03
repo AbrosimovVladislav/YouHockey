@@ -14,7 +14,7 @@ public class ProductMapper {
 
     public ProductDto map(Product product) {
         return new ProductDto().setProductId(product.getProductId())
-                .setProductType(product.getProductType())
+                .setMenuItem(product.getMenuItem())
                 .setInfo(product.getInfo())
                 .setLink(product.getLink())
                 .setImageLink(product.getImageLink())
@@ -24,7 +24,6 @@ public class ProductMapper {
                 .setCondition(product.getCondition())
                 .setCountry(product.getCountry())
                 .setBrand(product.getBrand())
-                .setType(product.getType())
                 .setRating(product.getRating())
                 .setMinPrice(offerService.calculateMinPriceByProduct(product.getProductId()));
     }

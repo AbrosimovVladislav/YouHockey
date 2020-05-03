@@ -13,7 +13,7 @@ import ru.yourhockey.model.product_attributes.Type;
 @Accessors(chain = true)
 public class ProductDto {
     /*@NonNull */private Long productId;
-    /*@NonNull */private String productType;
+    /*@NonNull */private String menuItem;
     /*@Nullable*/ private String info;
     /*@NonNull */private String link;
     /*@NonNull */private String imageLink;
@@ -23,7 +23,6 @@ public class ProductDto {
     private String condition;
     private String country;
     /*@NonNull */private Brand brand;
-    /*@NonNull */private Type type;
     /*@NonNull */private Rating rating;
     /*@NonNull */private Double minPrice;
 }

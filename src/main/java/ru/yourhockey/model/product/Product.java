@@ -8,14 +8,12 @@ import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product_attributes.Brand;
 import ru.yourhockey.model.product_attributes.Rating;
 import ru.yourhockey.model.product_attributes.Review;
-import ru.yourhockey.model.product_attributes.Type;
 
 import javax.persistence.*;
 import java.util.Set;
 
 import static ru.yourhockey.model.product.Product.PRODUCT_TABLE;
 import static ru.yourhockey.model.product_attributes.Brand.BRAND_ID;
-import static ru.yourhockey.model.product_attributes.Type.TYPE_ID;
 
 
 @Entity
@@ -50,7 +48,7 @@ public class Product implements BasicEntity {
     private Long productId;
 
     @Column(name = PRODUCT_TYPE, nullable = false, updatable = false)
-    private String productType; // allow: GUN, PART, AMMO
+    private String menuItem;
 
     @Column(name = PRODUCT_INFO)
     private String info;
@@ -79,10 +77,6 @@ public class Product implements BasicEntity {
     @ManyToOne
     @JoinColumn(name = BRAND_ID, nullable = false)
     private Brand brand;
-
-    @ManyToOne
-    @JoinColumn(name = TYPE_ID, nullable = false)
-    private Type type;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)

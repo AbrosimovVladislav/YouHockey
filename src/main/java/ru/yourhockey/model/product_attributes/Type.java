@@ -1,8 +1,7 @@
 package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -10,11 +9,9 @@ import java.util.Set;
 
 import static ru.yourhockey.model.product_attributes.Type.TYPE_TABLE;
 
-
+@Data
 @Entity
 @Table(name = TYPE_TABLE)
-@Getter
-@Setter
 public class Type {
     public static final String TYPE_TABLE = "type";
     public static final String TYPE_ID = "type_id";
@@ -43,8 +40,4 @@ public class Type {
      */
     @Column(name = TYPE_MENU_ITEM)
     private String menuItem;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = TYPE_TABLE)
-    private Set<Product> product;
 }

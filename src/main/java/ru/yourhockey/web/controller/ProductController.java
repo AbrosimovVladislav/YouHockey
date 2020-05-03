@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.service.ProductService;
@@ -45,9 +46,9 @@ public class ProductController {
 
     //ToDo переделать в один контроллер с сущностью с динамическим наполнением полей (см SimCardInfo в BEP)
     @GetMapping(value = "/matcherProducts", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<MatcherProductDto> getAll(){
+    public ResponseEntity<List<MatcherProductDto>> getAll(){
         List<Product> products = productService.getAll();
-        return matcherProductMapper.mapList(products);
+        return ResponseEntity.ok(matcherProductMapper.mapList(products));
     }
 
     @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

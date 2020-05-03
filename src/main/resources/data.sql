@@ -34,18 +34,16 @@ INSERT INTO brand (full_name, short_name) VALUES ('BAUER Hockey, LLC','Bauer');;
 INSERT INTO brand (full_name, short_name) VALUES ('Canada Cycle & Motor Co. Ltd.','CCM');;
 INSERT INTO brand (full_name, short_name) VALUES ('Warrior hockey, Ltd.','Warrior');;
 
-INSERT INTO type (menu_item, upper, medium, lower) VALUES ('Sticks','upper', 'medium', 'lower');;
-
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id, type_id)
-VALUES ('Новое','STICK',  1, 'VAPOR FLYLITE Griptac Stick Senior', 'black/red', '390 grams, Monocomp technology', 1,1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id, type_id)
-VALUES ('Новое','STICK',  2, 'SUPREME 2S PRO Griptac Stick Senior', 'black/yellow', '415 grams, Monocomp technology', 1,1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id, type_id)
-VALUES ('Новое','STICK',  3, 'NEXUS 2N PRO GRIPTAC Stick Senior', 'black/blue', '410 grams, Monocomp technology', 1,1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id, type_id)
-VALUES ('Новое','STICK',  4, 'VAPOR FLYLITE Griptac Stick Intermediate', 'black/red', '360 grams, Monocomp technology', 1,1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id, type_id)
-VALUES ('Новое','STICK',  5, 'VAPOR 2X PRO Griptac Stick Senior', 'black/red', '440 grams (62"), 425 grams (60"), High Performance mold', 1,1);;
+INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
+VALUES ('Новое','STICK',  1, 'VAPOR FLYLITE Griptac Stick Senior', 'black/red', '390 grams, Monocomp technology', 1);;
+INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
+VALUES ('Новое','STICK',  2, 'SUPREME 2S PRO Griptac Stick Senior', 'black/yellow', '415 grams, Monocomp technology', 1);;
+INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
+VALUES ('Новое','STICK',  3, 'NEXUS 2N PRO GRIPTAC Stick Senior', 'black/blue', '410 grams, Monocomp technology', 1);;
+INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
+VALUES ('Новое','STICK',  4, 'VAPOR FLYLITE Griptac Stick Intermediate', 'black/red', '360 grams, Monocomp technology', 1);;
+INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
+VALUES ('Новое','STICK',  5, 'VAPOR 2X PRO Griptac Stick Senior', 'black/red', '440 grams (62"), 425 grams (60"), High Performance mold', 1);;
 
 INSERT INTO shop (name, website) VALUES ('shop-name1', 'www.com.1');;
 INSERT INTO shop (name, website) VALUES ('shop-name2', 'www.com.2');;
@@ -62,38 +60,38 @@ INSERT INTO type (menu_item, upper, medium, lower) VALUES ('Ammo', 'upper','medi
 INSERT INTO type (menu_item, upper, medium, lower) VALUES ('Part', 'upper','medium', 'lower');;
 INSERT INTO type (menu_item, upper, medium, lower) VALUES ('Other', 'upper','medium', 'lower');;*/
 
-/*INSERT INTO product (condition, operating_principle, product_type, product_id,   model, weight, color, params, barrel_length, capacity, total_length, brand_id, caliber_id, type_id, weapon_platform_id)
+/*INSERT INTO product (condition, operating_principle, product_type, product_id,   model, weight, color, params, barrel_length, capacity, total_length, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Полуавтоматическое','GUN',  1, 'ak-47',   'b_l', 'capacity', 't_l', 'weight', '10',    '1000',     1, 1,    2, 1);;
-INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Полуавтоматическое','GUN',  2, 'ak-47',   'b_l', '10', '1000', 'weight', null,    null,     2, 2,    3, 2);;
-INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Полуавтоматическое','GUN',  3, 'ak-47',   'b_l', '10', '1000', 'weight', null,    null,     3, 2,    4, 3);;
-INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Полуавтоматическое','GUN',  4, 'ak-47',   'b_l', '30', '1000', 'weight', null,    null,     1, 3,    5, 4);;
-INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id,   model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Помповое','PART', 5, 'model',   null,  '10',     '1030',  null,     'color', 'params', 2, null, 7, 1);;
-INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Помповое','PART', 6,  'model',   null,  '30',     '1330',  null,     'color', 'params', 2, null, 7, 2);;
-INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','Помповое','PART', 7,  'model',   null,  '15',     '1220',  null,     'color', 'params', 2, null, 7, 3);;
-INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','ПродольноСкользящее','AMMO', 8,  '5.45 hp', null,  '17',     '1001',  'weight', null,    null,     2, 2,    6, null);;
-INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','ПродольноСкользящее','AMMO', 9,  '5.45 hp', null,  '2',     '1200',  'weight', null,    null,     3, 3,    6, null);;
-INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, type_id, weapon_platform_id)
+INSERT INTO product (condition, operating_principle,product_type, product_id, model, barrel_length, capacity, total_length, weight, color, params, brand_id, caliber_id, weapon_platform_id)
 VALUES ('Новое','ПродольноСкользящее','AMMO', 10, '5.45 hp', null,  '10',     '1040',  'weight', null,    null,     3, 4,    6, null);;
 
 INSERT INTO rating (value) VALUES (2);;
 INSERT INTO rating (value) VALUES (4);;*/
 
-/*INSERT INTO shop (name, website,rating_id) VALUES ('shop-name1', 'www.com.1',11);;
-INSERT INTO shop (name, website,rating_id) VALUES ('shop-name2', 'www.com.2',12);;
+/*INSERT INTO shop (name, website,rating_id) VALUES ('shop-name1', 'www.com.1'1);;
+INSERT INTO shop (name, website,rating_id) VALUES ('shop-name2', 'www.com.2'2);;
 
 UPDATE rating SET value=2 WHERE rating_id = (SELECT r.rating_id FROM rating r INNER JOIN shop s on r.rating_id = s.rating_id WHERE s.shop_id=1);;
 UPDATE rating SET value=5 WHERE rating_id = (SELECT r.rating_id FROM rating r INNER JOIN shop s on r.rating_id = s.rating_id WHERE s.shop_id=2);;*/
 
-/*INSERT INTO address (name,shop_id) VALUES ('address1',1);;
-INSERT INTO address (name,shop_id) VALUES ('address2',1);;
+/*INSERT INTO address (name,shop_id) VALUES ('address1');;
+INSERT INTO address (name,shop_id) VALUES ('address2');;
 INSERT INTO address (name,shop_id) VALUES ('address3',2);;
 INSERT INTO address (name,shop_id) VALUES ('address4',2);;
 
@@ -113,10 +111,10 @@ INSERT INTO product_in_shop (product_in_shop_id, additional_info, in_stock, link
 -- Gun filters *****************************************************************************************************************
 -- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','product_in_shop','price','productInShop.price');;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Gladkostvol', 'Цена', 'RANGE', 1,1);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Nareznoe', 'Цена', 'RANGE', 1,1);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop', 'Цена', 'RANGE', 1,1);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Цена', 'RANGE', 1,1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Gladkostvol', 'Цена', 'RANGE', 1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Nareznoe', 'Цена', 'RANGE', 1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop', 'Цена', 'RANGE', 1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Цена', 'RANGE', 1);;
 -- ----------------------------------------------------------------2 OPERATING_principle---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','product','operating_principle','operatingPrinciple');;
 INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Gladkostvol', 'Прицнип действия', 'CHECKBOX', 2,2);;
@@ -167,43 +165,43 @@ INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop
 INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Расположение стволов', 'CHECKBOX',      9,9);;
 -- ----------------------------------------------------------------10 WEIGHT---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','product','weight','weight');;
-INSERT INTO filter_item (menu_item, name, type, key_path_id,rank) VALUES ('Gladkostvol', 'Вес', 'CHECKBOX', 10,10);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Nareznoe', 'Вес', 'CHECKBOX',   10,10);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop', 'Вес', 'CHECKBOX',       10,10);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Вес', 'CHECKBOX',       10,10);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id,rank) VALUES ('Gladkostvol', 'Вес', 'CHECKBOX', 100);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Nareznoe', 'Вес', 'CHECKBOX',   100);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop', 'Вес', 'CHECKBOX',       100);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Вес', 'CHECKBOX',       100);;
 -- ----------------------------------------------------------------11 COUNTRY---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','product','country','country');;
-INSERT INTO filter_item (menu_item, name, type, key_path_id,rank) VALUES ('Gladkostvol', 'Страна происхождения', 'CHECKBOX', 11,11);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Nareznoe', 'Страна происхождения', 'CHECKBOX',  11,11);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop', 'Страна происхождения', 'CHECKBOX',      11,11);;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Страна происхождения', 'CHECKBOX',      11,11);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id,rank) VALUES ('Gladkostvol', 'Страна происхождения', 'CHECKBOX', 111);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Nareznoe', 'Страна происхождения', 'CHECKBOX',  111);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ooop', 'Страна происхождения', 'CHECKBOX',      111);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Shp',  'Страна происхождения', 'CHECKBOX',      111);;
 -- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 -- Ammo Filters *****************************************************************************************************************
 -- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Цена', 'RANGE', 1,1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Цена', 'RANGE', 1);;
 -- ----------------------------------------------------------------3 CALIBER---------------------------------------------------------
 INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Калибр', 'CHECKBOX', 3,3);;
 -- ----------------------------------------------------------------4 BRAND---------------------------------------------------------
 INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Бренд', 'CHECKBOX', 4,4);;
 -- ----------------------------------------------------------------12 CHARGE_TYPE---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','product','charge_type','chargeType');;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Тип заряда', 'CHECKBOX', 12,12);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Тип заряда', 'CHECKBOX', 122);;
 -- ----------------------------------------------------------------13 SLEEVE_MATERIAL---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','product','sleeve_material','sleeveMaterial');;
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Материал гильзы', 'CHECKBOX', 13,13);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Ammo', 'Материал гильзы', 'CHECKBOX', 133);;
 -- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 -- Part Filters *****************************************************************************************************************
 -- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Part', 'Цена', 'RANGE', 1,1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Part', 'Цена', 'RANGE', 1);;
 -- ----------------------------------------------------------------4 BRAND---------------------------------------------------------
 INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Part', 'Бренд', 'CHECKBOX', 4,4);;
 -- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 -- Other Filters *****************************************************************************************************************
 -- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
-INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Other','Цена', 'RANGE', 1,1);;
+INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Other','Цена', 'RANGE', 1);;
 -- ----------------------------------------------------------------4 BRAND---------------------------------------------------------
 INSERT INTO filter_item (menu_item, name, type, key_path_id, rank) VALUES ('Other','Бренд', 'CHECKBOX', 4,4);;
 -- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

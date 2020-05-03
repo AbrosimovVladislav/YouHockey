@@ -19,11 +19,10 @@ public class MatcherProductMapper {
     private MatcherProductDto map(Product product) {
         return new MatcherProductDto()
                 .setProductId(product.getProductId())
-                .setProductType(product.getProductType())
+                .setMenuItem(product.getMenuItem())
                 .setLink(product.getLink())
                 .setModel(product.getModel())
-                .setBrand(product.getBrand().toString())
-                .setType(product.getType().toString());
+                .setBrand(product.getBrand().getShortName());
     }
 
 }
