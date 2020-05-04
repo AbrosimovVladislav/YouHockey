@@ -30,20 +30,17 @@ CREATE TRIGGER productTrigger BEFORE INSERT ON product
 FOR EACH ROW
 EXECUTE FUNCTION insertNewRatingOnNewProduct();;
 
-INSERT INTO brand (full_name, short_name) VALUES ('BAUER Hockey, LLC','Bauer');;
+INSERT INTO brand (full_name, short_name) VALUES ('BAUER Hockey, LLC','BAUER');;
 INSERT INTO brand (full_name, short_name) VALUES ('Canada Cycle & Motor Co. Ltd.','CCM');;
-INSERT INTO brand (full_name, short_name) VALUES ('Warrior hockey, Ltd.','Warrior');;
+INSERT INTO brand (full_name, short_name) VALUES ('Warrior hockey, Ltd.','WARRIOR');;
 
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
-VALUES ('Новое','STICK',  1, 'VAPOR FLYLITE Griptac Stick Senior', 'black/red', '390 grams, Monocomp technology', 1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
-VALUES ('Новое','STICK',  2, 'SUPREME 2S PRO Griptac Stick Senior', 'black/yellow', '415 grams, Monocomp technology', 1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
-VALUES ('Новое','STICK',  3, 'NEXUS 2N PRO GRIPTAC Stick Senior', 'black/blue', '410 grams, Monocomp technology', 1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
-VALUES ('Новое','STICK',  4, 'VAPOR FLYLITE Griptac Stick Intermediate', 'black/red', '360 grams, Monocomp technology', 1);;
-INSERT INTO product (condition, product_type, product_id, model, color, params, brand_id)
-VALUES ('Новое','STICK',  5, 'VAPOR 2X PRO Griptac Stick Senior', 'black/red', '440 grams (62"), 425 grams (60"), High Performance mold', 1);;
+INSERT INTO type (type_id, upper, medium, show_name) VALUES (1,'ЗАЩИТА_ИГРОКА','ЗАЩИТА_ПАХА','Защита паха');;
+
+INSERT INTO product(product_id, model, brand_id, type_id, age, description, characteristics)
+VALUES (1, 'Protective Cup & Supporter', 1, 1, 'YTH', 'descr', 'characters');;
+
+INSERT INTO product(product_id, model, brand_id, type_id, age, description, characteristics)
+VALUES (2, 'Pro Jock', 2, 1, '', 'descr', 'characters');;
 
 INSERT INTO shop (name, website) VALUES ('HOCKEYBEZGRANIC', 'www.com.1');;
 INSERT INTO shop (name, website) VALUES ('shop-name2', 'www.com.2');;

@@ -35,7 +35,7 @@ public class OfferMapper {
                 .setBrand(offer.getProduct().getBrand().getShortName())
                 .setPrice(offer.getPrice())
                 .setInStore(offer.isInStock())
-                .setCategory(offer.getProduct().getMenuItem())
+                .setType(offer.getProduct().getType())
                 .setShopName(offer.getShop().getName())
                 .setLink(offer.getLink())
                 .setProductId(offer.getProduct().getProductId());
@@ -47,7 +47,6 @@ public class OfferMapper {
                 offerDto.getPrice(),
                 offerDto.getInStore(),
                 offerDto.getLink(),
-                0,
-                0);
+                0); //ToDo popularity is on 0 !!!
     }
 }

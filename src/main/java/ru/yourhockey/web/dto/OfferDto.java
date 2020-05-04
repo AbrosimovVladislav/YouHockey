@@ -2,16 +2,17 @@ package ru.yourhockey.web.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import ru.yourhockey.model.product_attributes.Type;
 
 @Data
 @Accessors(chain = true)
 public class OfferDto {
-    private String name;
-    private String brand;
+    private Long productId;
+    private String shopName;
     private Double price;
     private Boolean inStore;
-    private String category;
-    private String shopName;
     private String link;
-    private Long productId;
+    private String name;
+    private String brand;
+    private Type type;
 }

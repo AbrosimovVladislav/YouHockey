@@ -1,11 +1,8 @@
 package ru.yourhockey.model.product_attributes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
-import java.util.Set;
 
 import static ru.yourhockey.model.product_attributes.Type.TYPE_TABLE;
 
@@ -15,11 +12,10 @@ import static ru.yourhockey.model.product_attributes.Type.TYPE_TABLE;
 public class Type {
     public static final String TYPE_TABLE = "type";
     public static final String TYPE_ID = "type_id";
-    public static final String TYPE_NAME = "name";
     public static final String TYPE_UPPER = "upper";
     public static final String TYPE_MEDIUM = "medium";
     public static final String TYPE_LOWER = "lower";
-    public static final String TYPE_MENU_ITEM = "menuItem";
+    public static final String TYPE_SHOW_NAME = "show_name";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +31,6 @@ public class Type {
     @Column(name = TYPE_LOWER)
     private String lower;
 
-    /**
-     * Привязка к меню сучки
-     */
-    @Column(name = TYPE_MENU_ITEM)
-    private String menuItem;
+    @Column(name = TYPE_SHOW_NAME)
+    private String showName;
 }

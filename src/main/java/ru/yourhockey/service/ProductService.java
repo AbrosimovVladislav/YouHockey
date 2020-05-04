@@ -19,7 +19,7 @@ public class ProductService {
         return productRepo.findAllByParameters(requestParams, pageable, Product.class);
     }
 
-    public List<Product> getAll(){
+    public List<Product> getAll() {
         return productRepo.findAll();
     }
 

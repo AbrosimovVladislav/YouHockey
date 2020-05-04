@@ -14,16 +14,14 @@ public class ProductMapper {
 
     public ProductDto map(Product product) {
         return new ProductDto().setProductId(product.getProductId())
-                .setMenuItem(product.getMenuItem())
-                .setInfo(product.getInfo())
+                .setModel(product.getModel())
+                .setBrand(product.getBrand())
+                .setType(product.getType())
+                .setAge(product.getAge())
+                .setDescription(product.getDescription())
+                .setCharacteristics(product.getCharacteristics())
                 .setLink(product.getLink())
                 .setImageLink(product.getImageLink())
-                .setModel(product.getModel())
-                .setParams(product.getParams())
-                .setColor(product.getColor())
-                .setCondition(product.getCondition())
-                .setCountry(product.getCountry())
-                .setBrand(product.getBrand())
                 .setRating(product.getRating())
                 .setMinPrice(offerService.calculateMinPriceByProduct(product.getProductId()));
     }

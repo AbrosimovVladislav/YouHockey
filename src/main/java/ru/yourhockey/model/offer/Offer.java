@@ -27,7 +27,7 @@ import static ru.yourhockey.model.shop.Shop.SHOP_ID;
 public class Offer implements BasicEntity {
     public static final String OFFER_ID = "offerId";
     public static final String OFFER_TABLE = "offer";
-	public static final String OFFER_PRICE = "price";
+    public static final String OFFER_PRICE = "price";
     public static final String OFFER_SALE = "sale";
     public static final String OFFER_IN_STOCK = "inStock";
     public static final String OFFER_ADDITIONAL_INFO = "additionalInfo";
@@ -38,9 +38,9 @@ public class Offer implements BasicEntity {
     @Column(name = OFFER_ID, nullable = false)
     private String productInShopId;
 
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = PRODUCT_ID, nullable = false)
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = PRODUCT_ID, nullable = false)
     private Product product;
 
     @ManyToOne
@@ -50,15 +50,8 @@ public class Offer implements BasicEntity {
     @Column(name = OFFER_PRICE, nullable = false)
     private double price;
 
-    //ToDO выставить ограничение по скидке
-    @Column(name = OFFER_SALE)
-    private int sale;
-
     @Column(name = OFFER_IN_STOCK, nullable = false)
     private boolean inStock;
-
-    @Column(name = OFFER_ADDITIONAL_INFO)
-    private String additionalInfo;
 
     @Column(name = OFFER_LINK, nullable = false)
     private String link;
@@ -69,14 +62,13 @@ public class Offer implements BasicEntity {
     private double popularity;
 
     @SuppressWarnings("unused")
-    public Offer(Product product, Shop shop, double price, boolean inStock, String link, int sale, double popularity) {
+    public Offer(Product product, Shop shop, double price, boolean inStock, String link, double popularity) {
         this.productInShopId = product.getProductId() + ":" + shop.getShopId();
         this.product = product;
         this.shop = shop;
         this.price = price;
         this.inStock = inStock;
         this.link = link;
-        this.sale = sale;
         this.popularity = popularity;
     }
 }

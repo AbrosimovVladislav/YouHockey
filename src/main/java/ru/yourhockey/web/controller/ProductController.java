@@ -46,7 +46,7 @@ public class ProductController {
 
     //ToDo переделать в один контроллер с сущностью с динамическим наполнением полей (см SimCardInfo в BEP)
     @GetMapping(value = "/matcherProducts", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<MatcherProductDto>> getAll(){
+    public ResponseEntity<List<MatcherProductDto>> getAll() {
         List<Product> products = productService.getAll();
         return ResponseEntity.ok(matcherProductMapper.mapList(products));
     }
