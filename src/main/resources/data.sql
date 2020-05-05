@@ -401,8 +401,8 @@ VALUES (1, 'Protective Cup & Supporter', 1, 1, 'YTH', 'descr', 'characters');;
 INSERT INTO product(product_id, model, brand_id, type_id, age, description, characteristics)
 VALUES (2, 'Pro Jock', 2, 1, '', 'descr', 'characters');;*/
 
-INSERT INTO shop (name, website) VALUES ('HOCKEYBEZGRANIC', 'www.com.1');;
-INSERT INTO shop (name, website) VALUES ('shop-name2', 'www.com.2');;
+INSERT INTO shop (name, website) VALUES ('HOCKEYBEZGRANIC', 'https://hockeybezgranic.ru') ON CONFLICT (website) DO NOTHING;;
+INSERT INTO shop (name, website) VALUES ('SPORTDEPO', 'https://www.sportdepo.ru/') ON CONFLICT (website) DO NOTHING;;
 
 -- -----------------------------------------------------------------------------------------------------------------------
 

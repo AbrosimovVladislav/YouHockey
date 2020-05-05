@@ -36,7 +36,7 @@ public class Shop implements BasicEntity {
     @Column(name = SHOP_NAME, nullable = false)
     private String name;
 
-    @Column(name = SHOP_WEBSITE, nullable = false)
+    @Column(name = SHOP_WEBSITE, unique = true)
     private String website;
 
     @Column(name = SHOP_INFO, length = 2000)
