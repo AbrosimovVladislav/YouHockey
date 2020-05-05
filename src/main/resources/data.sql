@@ -10,6 +10,7 @@ CREATE OR REPLACE FUNCTION insertNewRatingOnNewShop() RETURNS TRIGGER AS $shopTr
     END;
 $shopTrigger$ LANGUAGE plpgsql;;
 
+DROP TRIGGER IF EXISTS shopTrigger ON shop;;
 CREATE TRIGGER shopTrigger BEFORE INSERT ON shop
 FOR EACH ROW
 EXECUTE FUNCTION insertNewRatingOnNewShop();;
@@ -26,14 +27,58 @@ CREATE OR REPLACE FUNCTION insertNewRatingOnNewProduct() RETURNS TRIGGER AS $pro
     END;
 $productTrigger$ LANGUAGE plpgsql;;
 
+DROP TRIGGER IF EXISTS productTrigger ON product;;
 CREATE TRIGGER productTrigger BEFORE INSERT ON product
 FOR EACH ROW
 EXECUTE FUNCTION insertNewRatingOnNewProduct();;
 
-INSERT INTO brand (full_name, short_name) VALUES ('BAUER Hockey, LLC','BAUER');;
-INSERT INTO brand (full_name, short_name) VALUES ('Canada Cycle & Motor Co. Ltd.','CCM');;
-INSERT INTO brand (full_name, short_name) VALUES ('Warrior hockey, Ltd.','WARRIOR');;
+-- BRAND INSERTING ************************************************************************************************** --
+INSERT INTO brand (full_name, short_name) VALUES ('BAUER Hockey, LLC','BAUER') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('Canada Cycle & Motor Co. Ltd.','CCM') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('Warrior hockey, Ltd.','WARRIOR') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('Fischer Sports GMBH','FISCHER') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('Brians Custom Sports','BRIANS') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('WALL','WALL') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('ITECH','ITECH') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('MH','MH') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('AR','AR') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('SL','SL') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('VAUGHN','VAUGHN') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('EASTON','EASTON') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('REEBOK','REEBOK') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('MISSION','MISSION') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('EAGLE','EAGLE') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('TRUE','TRUE') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('ЗАРЯД','ЗАРЯД') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('HOWIES','HOWIES') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('UNDER ARMOUR','UNDER ARMOUR') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('ISOSTAR','ISOSTAR') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('SHERWOOD','SHERWOOD') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('MAD GUY','MAD GUY') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('FINNSHARP','FINNSHARP') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('TOPO','TOPO') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('WRITEYBOARD','WRITEYBOARD') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('AEGIS','AEGIS') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('BLUESPORTS','BLUESPORTS') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('SPORTSTAPE','SPORTSTAPE') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('RENFREW','RENFREW') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('POWERFLEX','POWERFLEX') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('SALMING','SALMING') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('VEGUM','VEGUM') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('TSP','TSP') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('DRIBBLING PRO','DRIBBLING PRO') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('GREEN BISCUIT','GREEN BISCUIT') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('TEXSTYLE','TEXSTYLE') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('PROSHARP','PROSHARP') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('SKATE MATE','SKATE MATE') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('BLADEMASTER','BLADEMASTER') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('SSM','SSM') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('EYELETS','EYELETS') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('STEP','STEP') ON CONFLICT (short_name) DO NOTHING;;
+INSERT INTO brand (full_name, short_name) VALUES ('HEJDUK','HEJDUK') ON CONFLICT (short_name) DO NOTHING;;
+-- ***************************************************************************************************************** --
 
+-- TYPE INSERTING ************************************************************************************************** --
 INSERT INTO type (type_id, upper, medium, show_name)
 VALUES (1,
         'ЗАЩИТА_ИГРОКА',
@@ -346,15 +391,15 @@ ON CONFLICT (type_id) DO UPDATE
     SET upper     = excluded.upper,
         medium    = excluded.medium,
         show_name = excluded.show_name;;
+-- ***************************************************************************************************************** --
 
 
 
-
-INSERT INTO product(product_id, model, brand_id, type_id, age, description, characteristics)
+/*INSERT INTO product(product_id, model, brand_id, type_id, age, description, characteristics)
 VALUES (1, 'Protective Cup & Supporter', 1, 1, 'YTH', 'descr', 'characters');;
 
 INSERT INTO product(product_id, model, brand_id, type_id, age, description, characteristics)
-VALUES (2, 'Pro Jock', 2, 1, '', 'descr', 'characters');;
+VALUES (2, 'Pro Jock', 2, 1, '', 'descr', 'characters');;*/
 
 INSERT INTO shop (name, website) VALUES ('HOCKEYBEZGRANIC', 'www.com.1');;
 INSERT INTO shop (name, website) VALUES ('shop-name2', 'www.com.2');;

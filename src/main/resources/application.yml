@@ -12,12 +12,14 @@ spring:
     show-sql: true
     database: postgresql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         jdbc.lob.non_contextual_creation: true
         format_sql: true
 logging:
+  file: app.log
   level:
     io.gunmarket.demo: TRACE
+product.photo.dir: images

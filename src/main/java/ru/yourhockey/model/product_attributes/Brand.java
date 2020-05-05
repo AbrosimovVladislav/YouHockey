@@ -23,7 +23,7 @@ public class Brand {
     @Column(name = BRAND_ID, length = 8, nullable = false)
     private Long brandId;
 
-    @Column(name = BRAND_SHORT_NAME)
+    @Column(name = BRAND_SHORT_NAME, unique = true)
     private String shortName;
 
     @Column(name = BRAND_FULL_NAME)

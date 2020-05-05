@@ -3,6 +3,7 @@ package ru.yourhockey.model.product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product_attributes.Brand;
@@ -20,6 +21,7 @@ import static ru.yourhockey.model.product_attributes.Type.TYPE_ID;
 
 @Entity
 @Table(name = PRODUCT_TABLE)
+@Accessors(chain = true)
 @Getter
 @Setter
 public class Product implements BasicEntity {
@@ -30,6 +32,7 @@ public class Product implements BasicEntity {
     public static final String PRODUCT_DESCRIPTION = "description";
     public static final String PRODUCT_CHARACTERISTICS = "characteristics";
     public static final String PRODUCT_LINK = "link";
+    private static final String PRODUCT_SRC_IMAGE_LINK = "srcImageLink";
     public static final String PRODUCT_IMAGE_LINK = "imageLink";
     public static final String PRODUCT_RATING_ID = "ratingId";
 
@@ -67,7 +70,7 @@ public class Product implements BasicEntity {
     /**
      * Description of product. EX. 'Почувствуйте анатомическую форму нового налокотника Supreme 1S благодаря комп...'
      */
-    @Column(name = PRODUCT_DESCRIPTION)
+    @Column(name = PRODUCT_DESCRIPTION, length = 4095)
     private String description;
 
     /**
@@ -83,6 +86,9 @@ public class Product implements BasicEntity {
     @Column(name = PRODUCT_LINK)
     private String link;
 
+    @Column(name = PRODUCT_SRC_IMAGE_LINK)
+    private String srcImageLink;
+
     @Column(name = PRODUCT_IMAGE_LINK)
     private String imageLink;
 
@@ -97,4 +103,20 @@ public class Product implements BasicEntity {
     @JsonIgnore
     @OneToMany(mappedBy = PRODUCT_TABLE)
     private Set<Review> review;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", model='" + model + '\'' +
+                ", brand=" + (brand != null ? brand.getShortName() : "") +
+                ", type=" + type +
+                ", age='" + age + '\'' +
+                ", description='" + description + '\'' +
+                ", characteristics='" + characteristics + '\'' +
+                ", link='" + link + '\'' +
+                ", srcImageLink='" + srcImageLink + '\'' +
+                ", imageLink='" + imageLink + '\'' +
+                '}';
+    }
 }
