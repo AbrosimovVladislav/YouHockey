@@ -6,6 +6,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.service.ProductService;
 import ru.yourhockey.web.dto.MatcherProductDto;
@@ -17,6 +18,7 @@ import ru.yourhockey.web.webentities.FilterAndPageable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,6 +43,19 @@ public class ProductController {
                 pairOfParamsAndPageable.getFilter(),
                 pairOfParamsAndPageable.getPageable()
         );
+
+
+        //TODO ПРОВЕРИТЬ ПОЧЕМУ ТАКИЕ СТРАННЫЕ ЦИФРЫ ПОСЛЕ ЭТОЙ ВЫДАЧИ
+        //delete product without offers and delete not inStock offers
+        products = products.stream()
+                .peek(p -> {
+                    Set<Offer> offers = p.getOffer();
+                    offers = offers.stream().filter(Offer::isInStock).collect(Collectors.toSet());
+                    p.setOffer(offers);
+                })
+                .filter(p -> !p.getOffer().isEmpty())
+                .collect(Collectors.toList());
+
         return products.stream().map(productMapper::map).collect(Collectors.toList());
     }
 
