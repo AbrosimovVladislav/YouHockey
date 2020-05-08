@@ -6,7 +6,5 @@ import ru.yourhockey.model.product_attributes.Type;
 import java.util.Optional;
 
 public interface TypeRepo extends JpaRepository<Type, Long> {
-
-    public Optional<Type> findByShowName(String showName);
-
+    Optional<Type> findByShowName(String showName);
 }

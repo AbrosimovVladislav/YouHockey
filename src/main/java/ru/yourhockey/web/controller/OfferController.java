@@ -28,7 +28,7 @@ public class OfferController {
     private static final int DEFAULT_PAGE_NUMBER = 0;
     private static final int DEFAULT_PAGE_SIZE = 10;
 
-    @GetMapping(value = "/offers", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/offers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Offer> getAllByParams(@RequestParam Map<String, String> requestParams,
                                       @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                               Pageable pageable) {
@@ -38,7 +38,7 @@ public class OfferController {
         );
     }
 
-    @GetMapping(value = "/offers/{productId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/offers/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Offer> getByProductId(@PathVariable String productId,
                                       @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                               Pageable pageable) {

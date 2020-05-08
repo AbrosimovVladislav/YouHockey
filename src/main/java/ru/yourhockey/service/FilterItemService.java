@@ -27,18 +27,18 @@ public class FilterItemService {
         List<String> values = filterItemRepo.selectFromDistinct(keyPath.getTargetParam(), keyPath.getTargetEntity());
         FilterItem.FilterType type = filterItem.getType();
 
-        if (type == FilterItem.FilterType.CHECKBOX) {
-            filterItem.setValues(values);
-        } else if (type == FilterItem.FilterType.RANGE) {
-            filterItem.setValues(getMinMax(values));
-        } else {
-            throw new UnsupportedOperationException("Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong");
+        switch (type) {
+            case CHECKBOX -> filterItem.setValues(values);
+            case RANGE -> filterItem.setValues(getMinMax(values));
+            default -> throw new UnsupportedOperationException(
+                "Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong"
+            );
         }
     }
 
     private List<String> getMinMax(List<String> values) {
-        double min = 99999999999d;
-        double max = 0d;
+        double min = Double.MAX_VALUE;
+        double max = 0.;
         for (String value : values) {
             double currentValue = Double.parseDouble(value);
             min = Math.min(currentValue, min);

@@ -30,10 +30,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().not().authenticated();
     }
 
-/*    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth, UserService userService) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-    }*/
-
-
 }

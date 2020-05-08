@@ -16,5 +16,4 @@ public class FilterItemDto {
     private String filterType;
     private int rank;
     private List<String> value;
-
 }

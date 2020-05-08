@@ -11,6 +11,4 @@ public class TestController {
         return "redirect:index.html";
     }
 
-
-
 }

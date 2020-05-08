@@ -34,7 +34,7 @@ public class ProductController {
     private static final int DEFAULT_PAGE_SIZE = 10;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                                    Pageable pageable) {
@@ -60,20 +60,15 @@ public class ProductController {
     }
 
     //ToDo переделать в один контроллер с сущностью с динамическим наполнением полей (см SimCardInfo в BEP)
-    @GetMapping(value = "/allProducts", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/allProducts", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MatcherProductDto>> getAll() {
         List<Product> products = productService.getAll();
         return ResponseEntity.ok(matcherProductMapper.mapList(products));
     }
 
-    @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto getById(@PathVariable long productId) {
         Product product = productService.getById(productId);
         return productMapper.map(product);
-    }
-
-    @GetMapping(value = "/product/search/{searchQuery}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Product> search(@PathVariable String searchQuery) {
-        return productService.search(searchQuery);
     }
 }

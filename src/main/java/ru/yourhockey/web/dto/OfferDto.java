@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import ru.yourhockey.model.product_attributes.Type;
 
+
 @Data
 @Accessors(chain = true)
 public class OfferDto {

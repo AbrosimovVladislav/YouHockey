@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import ru.yourhockey.model.product_attributes.Type;
 
+
 @Setter
 @Getter
 @Accessors(chain = true)
