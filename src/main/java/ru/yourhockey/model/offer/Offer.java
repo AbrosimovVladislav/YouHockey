@@ -2,6 +2,7 @@ package ru.yourhockey.model.offer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,12 +18,11 @@ import javax.validation.constraints.Min;
 import static ru.yourhockey.model.product.Product.PRODUCT_ID;
 import static ru.yourhockey.model.shop.Shop.SHOP_ID;
 
+@Data
 @Entity
 @Table(name = Offer.OFFER_TABLE)
 @NoArgsConstructor
 @Accessors(chain = true)
-@Getter
-@Setter
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Offer implements BasicEntity {
     public static final String OFFER_ID = "offerId";
