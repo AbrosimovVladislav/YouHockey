@@ -5,12 +5,11 @@ import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Brand;
 import ru.yourhockey.model.product_attributes.Type;
 import ru.yourhockey.repo.filterandsorting.FilterAndSortingRepository;
-import ru.yourhockey.repo.searchProductRepo.SearchProductRepo;
 
 import java.util.Optional;
 
 
-public interface ProductRepo extends JpaRepository<Product, Long>, FilterAndSortingRepository<Product>, SearchProductRepo {
+public interface ProductRepo extends JpaRepository<Product, Long>, FilterAndSortingRepository<Product> {
     default void saveOrUpdate(Product product) {
         if (product.getModel().isBlank()) return;
         findByBrandAndModelAndAgeAndTypeAndSrcImageLink(
