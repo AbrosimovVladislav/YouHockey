@@ -33,7 +33,7 @@ public class ImageLoader {
 
         // TODO: проход и скачивание по тем, у кого есть срцИмгЛинк, но нет имгЛинк
         for (Product product : products) {
-            String type = product.getType().getShowName();
+            String type = product.getType().getShowName().replaceAll("/","-");
             String imgName = product.getBrand().getShortName() + "_" + product.getModel() + "_" + product.getAge() + ".png";
             try {
                 var url = new URL("http:" + product.getSrcImageLink());
