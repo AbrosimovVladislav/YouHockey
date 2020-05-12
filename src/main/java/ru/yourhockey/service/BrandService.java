@@ -17,4 +17,8 @@ public class BrandService {
         return brandRepo.findAll();
     }
 
+    public Brand getByShortName(String shortName){
+        return brandRepo.findByShortName(shortName);
+    }
+
 }

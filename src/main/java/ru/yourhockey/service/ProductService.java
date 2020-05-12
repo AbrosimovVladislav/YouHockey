@@ -27,4 +27,8 @@ public class ProductService {
         return productRepo.getOne(id);
     }
 
+    public Product troubleTicketCreateProduct(Product product){
+        return productRepo.troubleTicketSaveOrUpdate(product);
+    }
+
 }

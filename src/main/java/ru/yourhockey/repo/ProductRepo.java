@@ -21,6 +21,17 @@ public interface ProductRepo extends JpaRepository<Product, Long>, FilterAndSort
                 );
     }
 
+    default Product troubleTicketSaveOrUpdate(Product product) {
+        return findByBrandAndModelAndAgeAndType(
+                product.getBrand(), product.getModel(), product.getAge(), product.getType())
+                .map(value -> save(product.setProductId(value.getProductId())))
+                .orElseGet(() -> save(product));
+    }
+
+    Optional<Product> findByBrandAndModelAndAgeAndType(
+            Brand brand, String model, String age, Type type
+    );
+
     Optional<Product> findByBrandAndModelAndAgeAndTypeAndSrcImageLink(
             Brand brand, String model, String age, Type type, String srcImageLink
     );
