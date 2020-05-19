@@ -14,12 +14,11 @@ public class TypeService {
 
     private final TypeRepo typeRepo;
 
-    public Optional<Type> findByShowName(String showName) {
+    public Optional<Type> findByShowName(String showName){
         return typeRepo.findByShowName(showName);
     }
 
     public List<Type> findAll() {
         return typeRepo.findAll();
     }
-
 }

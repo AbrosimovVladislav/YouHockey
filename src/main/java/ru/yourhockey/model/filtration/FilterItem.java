@@ -2,6 +2,7 @@ package ru.yourhockey.model.filtration;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import ru.yourhockey.model.BasicEntity;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import static ru.yourhockey.model.filtration.KeyPath.KEY_PATH_ID;
 @Table(name = FILTER_ITEM_TABLE)
 @Getter
 @Setter
+@Accessors(chain = true)
 public class FilterItem implements BasicEntity {
 
     public static final String FILTER_ITEM_TABLE = "filterItem";

@@ -38,8 +38,7 @@ public class QueryBuilder {
     public <BE extends BasicEntity> CriteriaQuery<BE> addSort(CriteriaBuilder cb,
                                                               CriteriaQuery<BE> cq,
                                                               Pageable pageable) {
-        Order sortingPredicate = createSortingPredicate(cb, cq.getRoots().iterator().next(), pageable);
-        return cq.orderBy(sortingPredicate);
+        return createSortingPredicate(cb, cq, pageable);
     }
 
     private Predicate createSinglePredicate(CriteriaBuilder criteriaBuilder, Root root, QBParam qbParam) {
@@ -62,17 +61,29 @@ public class QueryBuilder {
         return path;
     }
 
-    private Order createSortingPredicate(CriteriaBuilder criteriaBuilder, Root root, Pageable pageable) {
+    private <BE extends BasicEntity> CriteriaQuery<BE> buildGroupByExpression(CriteriaQuery<BE> cq, Root<?> root, List<String> sortProperties) {
+        Path path = root.get(sortProperties.get(0));
+        sortProperties.remove(0);
+        for (String sortProperty : sortProperties) {
+            path = path.get(sortProperty);
+        }
+        return cq.groupBy(root, path);
+    }
+
+    private <BE extends BasicEntity> CriteriaQuery<BE> createSortingPredicate(CriteriaBuilder criteriaBuilder, CriteriaQuery<BE> cq, Pageable pageable) {
         Sort.Order sortingOrder = pageable.getSort().iterator().next();
         String sortingPropertyKey = sortingOrder.getProperty();
-        List<String> entitiesAndPropertyName = new ArrayList<>() {{
-            this.addAll(Arrays.asList(sortingPropertyKey.split("\\.")));
-        }};
+        List<String> sortProperties = Arrays.asList(sortingPropertyKey.split("\\."));
+        List<String> entitiesAndPropertyName = new ArrayList<>(sortProperties);
         String propertyName = entitiesAndPropertyName.remove(entitiesAndPropertyName.size() - 1);
+        Root<?> root = cq.getRoots().iterator().next();
         Path sortingPath = buildPath(propertyName, entitiesAndPropertyName, root);
-        return sortingOrder.isAscending()
+        cq = buildGroupByExpression(cq, root, new ArrayList<>(sortProperties));
+        return cq.orderBy(
+            sortingOrder.isAscending()
                 ? criteriaBuilder.asc(sortingPath)
-                : criteriaBuilder.desc(sortingPath);
+                : criteriaBuilder.desc(sortingPath)
+        );
     }
 
     private List<QBParam> parseRequestParamMap(Map<String, String> requestParams) {

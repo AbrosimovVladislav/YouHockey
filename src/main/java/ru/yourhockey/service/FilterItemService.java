@@ -8,12 +8,22 @@ import ru.yourhockey.repo.FilterItemRepo;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class FilterItemService {
 
     private final FilterItemRepo filterItemRepo;
+
+    public FilterItem createFilterItem(FilterItem filterItem) {
+        Optional<FilterItem> fiOptional = filterItemRepo.findByNameAndMenuItem(filterItem.getName(), filterItem.getMenuItem());
+        if (fiOptional.isPresent()) {
+            filterItem.setFilterItemId(fiOptional.get().getFilterItemId());
+            return filterItemRepo.save(filterItem);
+        }
+        return filterItemRepo.save(filterItem);
+    }
 
     public List<FilterItem> getFiltersByMenuItem(String menuItem) {
         List<FilterItem> filterItems = filterItemRepo.findAllByMenuItem(menuItem);
@@ -31,7 +41,7 @@ public class FilterItemService {
             case CHECKBOX -> filterItem.setValues(values);
             case RANGE -> filterItem.setValues(getMinMax(values));
             default -> throw new UnsupportedOperationException(
-                "Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong"
+                    "Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong"
             );
         }
     }

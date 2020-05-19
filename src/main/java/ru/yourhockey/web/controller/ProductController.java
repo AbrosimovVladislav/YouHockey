@@ -34,7 +34,7 @@ public class ProductController {
     private final TypeService typeService;
 
     private static final int DEFAULT_PAGE_NUMBER = 0;
-    private static final int DEFAULT_PAGE_SIZE = 10;
+    private static final int DEFAULT_PAGE_SIZE = 3000;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +53,7 @@ public class ProductController {
         products = products.stream()
                 .peek(p -> {
                     Set<Offer> offers = p.getOffer();
-                    offers = offers.stream().filter(Offer::isInStock).collect(Collectors.toSet());
+                    offers = offers.stream().filter(Offer::isInStock).filter(o -> o.getPrice()>0).collect(Collectors.toSet());
                     p.setOffer(offers);
                 })
                 .filter(p -> !p.getOffer().isEmpty())
