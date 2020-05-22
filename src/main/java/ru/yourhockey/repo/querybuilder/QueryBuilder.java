@@ -44,7 +44,7 @@ public class QueryBuilder {
     private Predicate createSinglePredicate(CriteriaBuilder criteriaBuilder, Root root, QBParam qbParam) {
         List<String> entities = qbParam.entities;
         Path path = buildPath(qbParam.paramName, entities, root);
-        return qbParam.operation.getPredicate(qbParam.paramValue, criteriaBuilder, path);
+        return qbParam.operation.getPredicate(qbParam.paramName, qbParam.paramValue, criteriaBuilder, path);
     }
 
     private Path buildPath(String paramName, List<String> entities, Root root) {
