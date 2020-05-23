@@ -83,6 +83,7 @@ public class ProductController {
         return ResponseEntity.ok(matcherProductMapper.mapList(products));
     }
 
+    @CrossOrigin
     @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto getById(@PathVariable long productId) {
         Product product = productService.getById(productId);

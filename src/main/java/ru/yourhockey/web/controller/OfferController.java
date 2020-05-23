@@ -38,6 +38,7 @@ public class OfferController {
         );
     }
 
+    @CrossOrigin
     @GetMapping(value = "/offers/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Offer> getByProductId(@PathVariable String productId,
                                       @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
