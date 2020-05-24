@@ -19,7 +19,9 @@ import ru.yourhockey.web.mapper.ProductMapper;
 import ru.yourhockey.web.validation.RequestParamsValidator;
 import ru.yourhockey.web.webentities.FilterAndPageable;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,25 +41,29 @@ public class ProductController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
-                                           @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
-                                                   Pageable pageable) {
+                                           @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
+        String inStock = requestParams.remove("inStock");
         FilterAndPageable pairOfParamsAndPageable = validator.validate(requestParams, pageable, Product.class);
-        List<Product> products = productService.getAllByParameters(
-                pairOfParamsAndPageable.getFilter(),
-                pairOfParamsAndPageable.getPageable()
-        );
+        List<Product> products;
 
-
-        //TODO ПРОВЕРИТЬ ПОЧЕМУ ТАКИЕ СТРАННЫЕ ЦИФРЫ ПОСЛЕ ЭТОЙ ВЫДАЧИ
-        //delete product without offers and delete not inStock offers
-        products = products.stream()
-                .peek(p -> {
-                    Set<Offer> offers = p.getOffer();
-                    offers = offers.stream().filter(Offer::isInStock).filter(o -> o.getPrice()>0).collect(Collectors.toSet());
-                    p.setOffer(offers);
-                })
-                .filter(p -> !p.getOffer().isEmpty())
-                .collect(Collectors.toList());
+        //ToDo вынести instock обработку в сервис и в более приличный вид
+        if (inStock != null && inStock.equalsIgnoreCase("true")) {
+            products = productService.getAllByParameters(
+                    pairOfParamsAndPageable.getFilter(),
+                    pairOfParamsAndPageable.getPageable()
+            );
+            products = products.stream()
+                    .peek(p -> {
+                        Set<Offer> offers = p.getOffer();
+                        offers = offers.stream().filter(Offer::isInStock).filter(o -> o.getPrice() > 0).collect(Collectors.toSet());
+                        p.setOffer(offers);
+                    })
+                    .filter(p -> !p.getOffer().isEmpty())
+                    .collect(Collectors.toList());
+        } else {
+            pairOfParamsAndPageable.getFilter().remove("offer.price");
+            products = productService.getAllByParameters(pairOfParamsAndPageable.getFilter(), pairOfParamsAndPageable.getPageable());
+        }
 
         return products.stream().map(productMapper::map).collect(Collectors.toList());
     }
@@ -88,5 +94,11 @@ public class ProductController {
     public ProductDto getById(@PathVariable long productId) {
         Product product = productService.getById(productId);
         return productMapper.map(product);
+    }
+
+    @CrossOrigin
+    @GetMapping("/products/search")
+    public ResponseEntity<List<ProductDto>> search(@RequestParam String searchLine) {
+        return ResponseEntity.ok(productMapper.mapList(productService.search(searchLine)));
     }
 }
