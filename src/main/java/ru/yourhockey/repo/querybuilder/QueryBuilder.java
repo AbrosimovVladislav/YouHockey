@@ -62,7 +62,7 @@ public class QueryBuilder {
     }
 
     private <BE extends BasicEntity> CriteriaQuery<BE> buildGroupByExpression(CriteriaQuery<BE> cq, Root<?> root, List<String> sortProperties) {
-        Path path = root.get(sortProperties.get(0));
+        Path path = root.join(sortProperties.get(0));
         sortProperties.remove(0);
         for (String sortProperty : sortProperties) {
             path = path.get(sortProperty);
@@ -78,7 +78,7 @@ public class QueryBuilder {
         String propertyName = entitiesAndPropertyName.remove(entitiesAndPropertyName.size() - 1);
         Root<?> root = cq.getRoots().iterator().next();
         Path sortingPath = buildPath(propertyName, entitiesAndPropertyName, root);
-        cq = buildGroupByExpression(cq, root, new ArrayList<>(sortProperties));
+//        cq = buildGroupByExpression(cq, root, new ArrayList<>(sortProperties));
         return cq.orderBy(
             sortingOrder.isAscending()
                 ? criteriaBuilder.asc(sortingPath)
