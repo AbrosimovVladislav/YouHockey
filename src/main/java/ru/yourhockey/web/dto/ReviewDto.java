@@ -15,5 +15,5 @@ public class ReviewDto {
 	@NonNull private final String comment;
 	@Nullable private final Long shopId;
 	@Nullable private final Long productId;
-	@Nullable private final Long userId;
+	@Nullable private final Long userId; // TODO: nullable due to not implemented accounting
 }

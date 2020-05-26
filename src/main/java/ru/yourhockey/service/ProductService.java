@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
     private final ProductRepo productRepo;
 
     public List<Product> getAllByParameters(Map<String, String> requestParams, Pageable pageable) {
@@ -42,4 +41,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public Product update(Product product) {
+        return productRepo.saveAndFlush(product);
+    }
 }

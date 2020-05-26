@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class ProductMapper {
-
     private final OfferService offerService;
 
     public List<ProductDto> mapList(List<Product> products) {

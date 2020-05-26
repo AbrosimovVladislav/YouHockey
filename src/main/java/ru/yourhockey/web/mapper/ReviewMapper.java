@@ -9,6 +9,8 @@ import ru.yourhockey.service.ProductService;
 import ru.yourhockey.service.ShopService;
 import ru.yourhockey.web.dto.ReviewDto;
 
+import java.util.Optional;
+
 
 @Component
 @RequiredArgsConstructor
@@ -17,8 +19,8 @@ public class ReviewMapper {
     private final ProductService productService;
 
     public Review map(ReviewDto reviewDto) {
-        Shop shop = reviewDto.getShopId() == null ? null : shopService.getById(reviewDto.getShopId());
-        Product product = reviewDto.getProductId() == null ? null : productService.getById(reviewDto.getProductId());
+        Shop shop = Optional.ofNullable(reviewDto.getShopId()).map(shopService::getById).orElse(null);
+        Product product = Optional.ofNullable(reviewDto.getProductId()).map(productService::getById).orElse(null);
         return new Review()
                 .setMark(reviewDto.getMark())
                 .setPros(reviewDto.getPros())

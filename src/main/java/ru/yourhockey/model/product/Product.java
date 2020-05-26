@@ -13,6 +13,7 @@ import ru.yourhockey.model.product_attributes.Type;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static ru.yourhockey.model.product.Product.PRODUCT_TABLE;
 import static ru.yourhockey.model.product_attributes.Brand.BRAND_ID;
@@ -82,7 +83,6 @@ public class Product implements BasicEntity {
     /**
      * Technical fields
      */
-
     @Column(name = PRODUCT_LINK)
     private String link;
 
@@ -100,23 +100,32 @@ public class Product implements BasicEntity {
     @OneToMany(mappedBy = PRODUCT_TABLE)
     private Set<Offer> offer;
 
+    private Double minPrice;
+
     @JsonIgnore
     @OneToMany(mappedBy = PRODUCT_TABLE)
     private Set<Review> review;
+
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer reviewCount;
 
     @Override
     public String toString() {
         return "Product{" +
                 "productId=" + productId +
                 ", model='" + model + '\'' +
-                ", brand=" + (brand != null ? brand.getShortName() : "") +
-                ", type=" + type +
+                ", brand=" + brand.getShortName() +
+                ", type=" + type.getShowName() +
                 ", age='" + age + '\'' +
                 ", description='" + description + '\'' +
                 ", characteristics='" + characteristics + '\'' +
                 ", link='" + link + '\'' +
                 ", srcImageLink='" + srcImageLink + '\'' +
                 ", imageLink='" + imageLink + '\'' +
+                ", rating=" + rating.getValue() +
+                ", minPrice=" + minPrice +
+                ", review=" + review.stream().map(Review::getMark).collect(Collectors.toList()) +
+                ", reviewCount=" + reviewCount +
                 '}';
     }
 }

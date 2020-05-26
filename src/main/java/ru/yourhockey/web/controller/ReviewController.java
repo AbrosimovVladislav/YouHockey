@@ -49,8 +49,8 @@ public class ReviewController {
         );
     }
 
-    @PostMapping("/reviews/shop")
-    public ResponseEntity<Boolean> addReviewOnShop(@RequestBody ReviewDto reviewDto) {
-        return ResponseEntity.ok(reviewService.addReviewAndUpdateShopRating(reviewMapper.map(reviewDto)));
+    @PostMapping("/reviews")
+    public ResponseEntity<Boolean> addReview(@RequestBody ReviewDto reviewDto) {
+        return ResponseEntity.ok(reviewService.addReview(reviewMapper.map(reviewDto)));
     }
 }
