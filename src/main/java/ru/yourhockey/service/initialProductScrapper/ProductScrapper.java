@@ -47,7 +47,7 @@ public class ProductScrapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        categories = fromJson("classpath:product-scrapper/categories.json");
+        categories = fromJson("product-scrapper/categories.json");
     }
 
     public List<Product> actualizeFullProductCatalog() {
