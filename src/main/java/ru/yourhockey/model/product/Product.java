@@ -114,17 +114,17 @@ public class Product implements BasicEntity {
         return "Product{" +
                 "productId=" + productId +
                 ", model='" + model + '\'' +
-                ", brand=" + brand.getShortName() +
-                ", type=" + type.getShowName() +
+                ", brand=" + (brand != null ? brand.getShortName() : "null") +
+                ", type=" + (type != null ? type.getShowName() : "null") +
                 ", age='" + age + '\'' +
                 ", description='" + description + '\'' +
                 ", characteristics='" + characteristics + '\'' +
                 ", link='" + link + '\'' +
                 ", srcImageLink='" + srcImageLink + '\'' +
                 ", imageLink='" + imageLink + '\'' +
-                ", rating=" + rating.getValue() +
+                ", rating=" + (rating != null ? rating.getValue() : "null") +
                 ", minPrice=" + minPrice +
-                ", review=" + review.stream().map(Review::getMark).collect(Collectors.toList()) +
+                ", review=" + (review != null ? review.stream().map(Review::getMark).collect(Collectors.toList()) : "null") +
                 ", reviewCount=" + reviewCount +
                 '}';
     }
