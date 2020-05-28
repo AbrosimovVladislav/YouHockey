@@ -12,6 +12,7 @@ import ru.yourhockey.model.product_attributes.Review;
 import ru.yourhockey.model.product_attributes.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -98,16 +99,16 @@ public class Product implements BasicEntity {
     private Rating rating;
 
     @OneToMany(mappedBy = PRODUCT_TABLE)
-    private Set<Offer> offer;
+    private Set<Offer> offer = new HashSet<>();
 
     private Double minPrice;
 
     @JsonIgnore
     @OneToMany(mappedBy = PRODUCT_TABLE)
-    private Set<Review> review;
+    private Set<Review> review = new HashSet<>();
 
     @Column(nullable = false, columnDefinition = "int default 0")
-    private Integer reviewCount;
+    private Integer reviewCount = 0;
 
     @Override
     public String toString() {
@@ -124,7 +125,7 @@ public class Product implements BasicEntity {
                 ", imageLink='" + imageLink + '\'' +
                 ", rating=" + (rating != null ? rating.getValue() : "null") +
                 ", minPrice=" + minPrice +
-                ", review=" + (review != null ? review.stream().map(Review::getMark).collect(Collectors.toList()) : "null") +
+                ", review=" + review.stream().map(Review::getMark).collect(Collectors.toList()) +
                 ", reviewCount=" + reviewCount +
                 '}';
     }
