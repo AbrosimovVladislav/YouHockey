@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Brand;
@@ -47,7 +48,7 @@ public class ProductScrapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        categories = fromJson("src/main/resources/product-scrapper/categories.json");
+        categories = fromJson("product-scrapper/categories.json");
     }
 
     public List<Product> actualizeFullProductCatalog() {
@@ -264,7 +265,7 @@ public class ProductScrapper implements InitializingBean {
 
     private static Map<String, String> fromJson(String path) {
         try {
-            return new ObjectMapper().readValue(Paths.get(path).toFile(), Map.class);
+            return new ObjectMapper().readValue(new ClassPathResource(path).getFile(), Map.class);
         } catch (IOException e) {
             log.error("Converting of json failed. Failed file path: {}", path);
             log.error(e.toString());
