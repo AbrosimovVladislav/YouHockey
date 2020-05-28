@@ -20,7 +20,6 @@ import ru.yourhockey.repo.TypeRepo;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -48,7 +47,7 @@ public class ProductScrapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        categories = fromJson("product-scrapper/categories.json");
+        categories = fromJson("classpath:product-scrapper/categories.json");
     }
 
     public List<Product> actualizeFullProductCatalog() {
@@ -265,6 +264,7 @@ public class ProductScrapper implements InitializingBean {
 
     private static Map<String, String> fromJson(String path) {
         try {
+            log.info("Reading categories from path={}", path);
             return new ObjectMapper().readValue(new ClassPathResource(path).getInputStream(), Map.class);
         } catch (IOException e) {
             log.error("Converting of json failed. Failed file path: {}", path);
