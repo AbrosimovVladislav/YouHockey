@@ -23,7 +23,7 @@ public class FilterController {
 
     /*ToDo Выбрать колонку в которой лежат не строки и проверить работоспособность всей цепочки */
     /*ToDo Подумать над тем, мб пустить фильтер не по меню айтему а по всему тайпу */
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @GetMapping(value = "/product/filters/{menuItem}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FilterItemDto> getFilterItemsByMenuItem(@PathVariable String menuItem) {
         List<FilterItem> filterItems = filterItemService.getFiltersByMenuItem(menuItem);
