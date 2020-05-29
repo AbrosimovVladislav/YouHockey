@@ -1,11 +1,13 @@
 package ru.yourhockey.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Brand;
 import ru.yourhockey.model.product_attributes.Type;
 import ru.yourhockey.repo.filterandsorting.FilterAndSortingRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -35,4 +37,7 @@ public interface ProductRepo extends JpaRepository<Product, Long>, FilterAndSort
     Optional<Product> findByBrandAndModelAndAgeAndTypeAndSrcImageLink(
             Brand brand, String model, String age, Type type, String srcImageLink
     );
+
+    @Query(nativeQuery = true, value = "SELECT * FROM product LIMIT ?1")
+    List<Product> findAllLimit(int x);
 }
