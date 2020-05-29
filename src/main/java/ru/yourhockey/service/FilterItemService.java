@@ -38,9 +38,9 @@ public class FilterItemService {
         FilterItem.FilterType type = filterItem.getType();
 
         switch (type) {
-            case CHECKBOX -> filterItem.setValues(values);
-            case RANGE -> filterItem.setValues(getMinMax(values));
-            default -> throw new UnsupportedOperationException(
+            case CHECKBOX: filterItem.setValues(values); break;
+            case RANGE: filterItem.setValues(getMinMax(values)); break;
+            default: throw new UnsupportedOperationException(
                     "Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong"
             );
         }
