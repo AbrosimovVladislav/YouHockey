@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product_attributes.Brand;
@@ -54,6 +56,7 @@ public class Product implements BasicEntity {
      */
     @ManyToOne
     @JoinColumn(name = BRAND_ID, nullable = false)
+    @Fetch(FetchMode.JOIN)
     private Brand brand;
 
     /**
@@ -61,6 +64,7 @@ public class Product implements BasicEntity {
      */
     @ManyToOne
     @JoinColumn(name = TYPE_ID, nullable = false)
+    @Fetch(FetchMode.JOIN)
     private Type type;
 
     /**
@@ -96,15 +100,18 @@ public class Product implements BasicEntity {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = PRODUCT_RATING_ID, referencedColumnName = PRODUCT_RATING_ID, unique = true)
+    @Fetch(FetchMode.JOIN)
     private Rating rating;
 
     @OneToMany(mappedBy = PRODUCT_TABLE)
+    @Fetch(FetchMode.JOIN)
     private Set<Offer> offer = new HashSet<>();
 
     private Double minPrice;
 
     @JsonIgnore
     @OneToMany(mappedBy = PRODUCT_TABLE)
+    @Fetch(FetchMode.JOIN)
     private Set<Review> review = new HashSet<>();
 
     @Column(nullable = false, columnDefinition = "int default 0")
