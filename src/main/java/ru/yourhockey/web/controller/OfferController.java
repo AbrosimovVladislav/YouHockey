@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.service.OfferService;
+import ru.yourhockey.service.ProductService;
 import ru.yourhockey.web.dto.OfferDto;
 import ru.yourhockey.web.mapper.OfferMapper;
 import ru.yourhockey.web.validation.RequestParamsValidator;
@@ -24,6 +25,7 @@ public class OfferController {
     private final OfferService offerService;
     private final RequestParamsValidator validator;
     private final OfferMapper offerMapper;
+    private final ProductService productService;
 
     private static final int DEFAULT_PAGE_NUMBER = 0;
     private static final int DEFAULT_PAGE_SIZE = 10;
@@ -54,6 +56,7 @@ public class OfferController {
         List<Offer> offers = offerMapper.mapToOffer(body);
         offerService.deleteAll();
         List<Offer> savedOffers = offerService.saveAll(offers);
+        productService.recalculateMinPrice();
         return ResponseEntity.ok(offerMapper.mapToOfferDto(savedOffers));
     }
 

@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.yourhockey.model.offer.Offer;
-import ru.yourhockey.model.product.Product;
 import ru.yourhockey.repo.OfferRepo;
-import ru.yourhockey.repo.ProductRepo;
 
 import java.util.List;
 import java.util.Map;
@@ -22,11 +20,15 @@ public class OfferService {
         return offerRepo.findAllByParameters(requestParams, pageable, Offer.class);
     }
 
-    public List<Offer> saveAll(List<Offer> offers){
+    public List<Offer> saveAll(List<Offer> offers) {
         return offerRepo.saveAll(offers);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         offerRepo.deleteAll();
+    }
+
+    public Double calculateMinPriceByProduct(Long productId) {
+        return offerRepo.calculateMinPriceByProduct(productId);
     }
 }

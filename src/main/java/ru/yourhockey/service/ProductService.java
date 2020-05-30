@@ -15,6 +15,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepo productRepo;
+    private final OfferService offerService;
+
+    public List<Product> recalculateMinPrice() {
+        List<Product> all = productRepo.findAll();
+        return all.stream()
+                .filter(p -> p.getOffer() != null && !p.getOffer().isEmpty())
+                .map(p -> productRepo.save(p.setMinPrice(offerService.calculateMinPriceByProduct(p.getProductId()))))
+                .collect(Collectors.toList());
+    }
 
     public List<Product> getAllByParameters(Map<String, String> requestParams, Pageable pageable) {
         return productRepo.findAllByParameters(requestParams, pageable, Product.class);
