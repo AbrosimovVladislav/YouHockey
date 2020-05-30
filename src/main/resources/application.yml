@@ -9,7 +9,6 @@ spring:
     initialization-mode: always
     separator: ;;
   jpa:
-    show-sql: true
     database: postgresql
     hibernate:
       ddl-auto: update
@@ -23,3 +22,10 @@ logging:
     name: app.log
 
 product.photo.dir: images
+
+---
+spring:
+  profiles:
+    active: dev
+  jpa:
+    show-sql: true
