@@ -24,5 +24,4 @@ spring:
 #    io.gunmarket.demo: TRACE
 product.photo.dir: images
 logging:
-  level:
-    ROOT: off
+  level: off
