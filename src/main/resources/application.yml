@@ -22,10 +22,3 @@ logging:
     name: app.log
 
 product.photo.dir: images
-
----
-spring:
-  profiles:
-    active: dev
-  jpa:
-    show-sql: true
