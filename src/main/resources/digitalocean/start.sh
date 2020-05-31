@@ -14,7 +14,7 @@ cd ../YouHockey
 git checkout master
 git pull
 mvn clean package
-java -jar target/YouHockey.jar &
+java -jar target/YourHockey.jar &
 
 cd ../JackNorthon
 git checkout master
