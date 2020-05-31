@@ -98,7 +98,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/sildvauresberg/calculator</url>
+            <url>https://maven.pkg.github.com/AbrosimovVladislav/YouHockey</url>
         </repository>
     </distributionManagement>
 </project>
