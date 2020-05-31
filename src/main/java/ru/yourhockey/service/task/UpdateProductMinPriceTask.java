@@ -21,7 +21,8 @@ public class UpdateProductMinPriceTask {
 
     @Scheduled(cron = "0 */15 * * * ?")
     public void run() {
-        long start = System.currentTimeMillis();
+        log.info("UpdateProductMinPriceTask started");
+/*        long start = System.currentTimeMillis();
         log.info("UpdateProductMinPriceTask was started");
         int page = 0;
         PageRequest pageRequest;
@@ -36,6 +37,6 @@ public class UpdateProductMinPriceTask {
             });
             page += 1;
         } while (productPage.getSize() == size);
-        log.info("UpdateProductMinPriceTask was completed in {}", System.currentTimeMillis() - start);
+        log.info("UpdateProductMinPriceTask was completed in {}", System.currentTimeMillis() - start);*/
     }
 }

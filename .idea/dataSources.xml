@@ -7,5 +7,17 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/yourhockey</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="scrappingservice@161.35.70.99" uuid="8cefbf83-c046-4071-8756-972245754943">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://161.35.70.99:5432/scrappingservice</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="matchingservice@161.35.70.99" uuid="7294cc12-8bcf-407b-aeba-36ed815f6ceb">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://161.35.70.99:5432/matchingservice</jdbc-url>
+    </data-source>
   </component>
 </project>

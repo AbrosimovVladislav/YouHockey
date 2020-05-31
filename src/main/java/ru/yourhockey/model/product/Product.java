@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product_attributes.Brand;
