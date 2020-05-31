@@ -3,7 +3,7 @@ Description=YouHockey
 
 [Service]
 WorkingDirectory=/opt/prod
-ExecStart=/bin/java -Xms128m -Xmx256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root -jar YourHockey.jar
+ExecStart=/usr/bin/java -Xms128m -Xmx256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root -jar YourHockey.jar
 Type=simple
 
 [Install]
