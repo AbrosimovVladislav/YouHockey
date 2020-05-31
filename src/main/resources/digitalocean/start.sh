@@ -30,4 +30,6 @@ systemctl start scrapping.service
 cd ../JackNorthon
 git checkout master
 git pull
-ng serve --host=161.35.70.99 &
+ng build --prod
+sudo chmod -R 755 /var/www
+cp -R dist/JackNorthon/* /var/www/html
