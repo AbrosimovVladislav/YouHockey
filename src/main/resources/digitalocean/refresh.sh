@@ -1,4 +1,4 @@
-cd ScrappingService
+cd /root/ScrappingService
 git checkout master
 git pull
 systemctl stop scrapping.service
@@ -6,7 +6,7 @@ cp scrapping.service /etc/systemd/system/scrapping.service
 mvn clean package
 cp target/ScrappingService.jar /opt/prod/ScrappingService.jar
 
-cd ../MatchingService
+cd /root/MatchingService
 git checkout master
 git pull
 systemctl stop matching.service
@@ -14,7 +14,7 @@ cp matching.service /etc/systemd/system/matching.service
 mvn clean package
 cp target/MatchingService.jar /opt/prod/MatchingService.jar
 
-cd ../YouHockey
+cd /root/YouHockey
 git checkout master
 git pull
 systemctl stop youhockey.service
@@ -27,7 +27,7 @@ systemctl start youhockey.service
 systemctl start matching.service
 systemctl start scrapping.service
 
-cd ../JackNorthon
+cd /root/JackNorthon
 git checkout master
 git pull
 ng build --prod
