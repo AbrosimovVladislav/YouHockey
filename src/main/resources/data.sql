@@ -515,6 +515,7 @@ ON CONFLICT (type_id) DO UPDATE
 INSERT INTO shop (name, website) VALUES ('HOCKEYBEZGRANIC', 'https://hockeybezgranic.ru') ON CONFLICT (website) DO NOTHING;;
 INSERT INTO shop (name, website) VALUES ('SPORTDEPO', 'https://www.sportdepo.ru/') ON CONFLICT (website) DO NOTHING;;
 INSERT INTO shop (name, website) VALUES ('HOCK5', 'https://hock5.ru/') ON CONFLICT (website) DO NOTHING;;
+INSERT INTO shop (name, website) VALUES ('ALLHOCKEY', 'https://allhockey24.ru') ON CONFLICT (website) DO NOTHING;;
 
 /*-- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','offer','price','offer.price')ON CONFLICT (value) DO NOTHING;;
