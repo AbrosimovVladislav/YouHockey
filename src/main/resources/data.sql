@@ -517,6 +517,7 @@ INSERT INTO shop (name, website) VALUES ('SPORTDEPO', 'https://www.sportdepo.ru/
 INSERT INTO shop (name, website) VALUES ('HOCK5', 'https://hock5.ru/') ON CONFLICT (website) DO NOTHING;;
 INSERT INTO shop (name, website) VALUES ('ALLHOCKEY', 'https://allhockey24.ru') ON CONFLICT (website) DO NOTHING;;
 INSERT INTO shop (name, website) VALUES ('FORMASPB', 'https://forma-spb.ru') ON CONFLICT (website) DO NOTHING;;
+INSERT INTO shop (name, website) VALUES ('KLUSHKI', 'https://klushki.com//') ON CONFLICT (website) DO NOTHING;;
 
 /*-- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','offer','price','offer.price')ON CONFLICT (value) DO NOTHING;;
