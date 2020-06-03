@@ -6,6 +6,7 @@ import ru.yourhockey.model.filtration.FilterItem;
 import ru.yourhockey.model.filtration.KeyPath;
 import ru.yourhockey.repo.FilterItemRepo;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -35,15 +36,45 @@ public class FilterItemService {
     private void determineValues(FilterItem filterItem) {
         KeyPath keyPath = filterItem.getKeyPath();
         List<String> values = filterItemRepo.selectFromDistinct(keyPath.getTargetParam(), keyPath.getTargetEntity());
+        if (filterItem.getName().equalsIgnoreCase("Брэнд")) {
+            values = sortBrandFilterItem(values);
+        }
+        if(filterItem.getName().equalsIgnoreCase("Возраст")){
+            values = List.of("SR","INT","JR","YTH");
+        }
         FilterItem.FilterType type = filterItem.getType();
 
         switch (type) {
-            case CHECKBOX: filterItem.setValues(values); break;
-            case RANGE: filterItem.setValues(getMinMax(values)); break;
-            default: throw new UnsupportedOperationException(
-                    "Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong"
-            );
+            case CHECKBOX:
+                filterItem.setValues(values);
+                break;
+            case RANGE:
+                filterItem.setValues(getMinMax(values));
+                break;
+            default:
+                throw new UnsupportedOperationException(
+                        "Filter type of " + filterItem.getFilterItemId() + " " + filterItem.getName() + " is wrong"
+                );
         }
+    }
+
+    //Переделать в нормальный ранкинг для фильтров (каждый filter checkbox - enum)
+    private List<String> sortBrandFilterItem(List<String> values) {
+        List<String> sortedValues = new ArrayList<>(
+                List.of("BAUER",
+                        "CCM",
+                        "WARRIOR",
+                        "FISCHER",
+                        "EASTON",
+                        "REEBOK",
+                        "MAD GUY",
+                        "HOWIES")
+        );
+        values.stream()
+                .map(String::toUpperCase)
+                .filter(b -> !sortedValues.contains(b))
+                .forEach(sortedValues::add);
+        return sortedValues;
     }
 
     private List<String> getMinMax(List<String> values) {
