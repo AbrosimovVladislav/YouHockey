@@ -3,6 +3,7 @@ package ru.yourhockey.web.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.product.Product;
+import ru.yourhockey.model.product_attributes.Age;
 import ru.yourhockey.service.OfferService;
 import ru.yourhockey.web.dto.ProductDto;
 
@@ -25,7 +26,7 @@ public class ProductMapper {
                 .setModel(product.getModel())
                 .setBrand(product.getBrand())
                 .setType(product.getType())
-                .setAge(product.getAge())
+                .setAge(product.getAge() == Age.UNDEFINED ? "" : product.getAge().name())
                 .setDescription(product.getDescription())
                 .setCharacteristics(product.getCharacteristics())
                 .setLink(product.getLink())

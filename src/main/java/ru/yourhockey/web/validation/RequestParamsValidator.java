@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product.Product;
+import ru.yourhockey.model.product_attributes.Age;
 import ru.yourhockey.model.product_attributes.Rating;
 import ru.yourhockey.model.product_attributes.Review;
 import ru.yourhockey.web.webentities.FilterAndPageable;
@@ -24,6 +25,15 @@ public class RequestParamsValidator {
         sortingValidation(filterAndPageable, entityClass);
         paginationValidation(filterAndPageable);
         return filterAndPageable;
+    }
+
+    public FilterAndPageable validateAgeParam(FilterAndPageable fap) {
+        Map<String, String> filter = fap.getFilter();
+        if (filter.containsKey("age")) {
+            filter.put("age", filter.get("age") + "," + Age.UNDEFINED.name());
+            fap.setFilter(filter);
+        }
+        return fap;
     }
 
     private void sortingValidation(FilterAndPageable filterAndPageable, Class<? extends BasicEntity> entityClass) {

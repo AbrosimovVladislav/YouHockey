@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import ru.yourhockey.model.filtration.FilterItem;
 import ru.yourhockey.web.dto.FilterItemDto;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FilterItemMapper {
@@ -16,7 +18,12 @@ public class FilterItemMapper {
                 .setFilterKey(filterItem.getKeyPath().getValue())
                 .setFilterType(filterItem.getType().name())
                 .setRank(filterItem.getRank())
-                .setValue(filterItem.getValues());
+                .setValue(prepareAgeFilterValues(filterItem.getValues(), filterItem.getName()));
+    }
+
+    private List<String> prepareAgeFilterValues(List<String> filterValues, String filterName) {
+        if (filterName.equalsIgnoreCase("Возраст")) filterValues.remove("UNDEFINED");
+        return filterValues;
     }
 
 }

@@ -44,7 +44,18 @@ public class ProductService {
     public List<Product> search(String searchLine) {
         List<Product> products = productRepo.findAll();
         return products.stream()
-                .map(p -> Pair.of(p, String.join(" ", List.of(p.getType().getShowName(), p.getBrand().getShortName(), p.getModel(), p.getAge()))))
+                .map(p -> Pair.of(
+                    p,
+                    String.join(
+                        " ",
+                        List.of(
+                            p.getType().getShowName(),
+                            p.getBrand().getShortName(),
+                            p.getModel(),
+                            p.getAge().name()
+                        )
+                    )
+                ))
                 .filter(pair -> pair.getSecond().toUpperCase().contains(searchLine.toUpperCase()))
                 .map(Pair::getFirst)
                 .collect(Collectors.toList());

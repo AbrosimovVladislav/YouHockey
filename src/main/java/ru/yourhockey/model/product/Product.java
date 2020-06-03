@@ -6,10 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
-import ru.yourhockey.model.product_attributes.Brand;
-import ru.yourhockey.model.product_attributes.Rating;
-import ru.yourhockey.model.product_attributes.Review;
-import ru.yourhockey.model.product_attributes.Type;
+import ru.yourhockey.model.product_attributes.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -66,8 +63,9 @@ public class Product implements BasicEntity {
     /**
      * Age category of product. EX. 'SR' Possible:(YTH,JR,INT,SR)
      */
+    @Enumerated(EnumType.STRING)
     @Column(name = PRODUCT_AGE)
-    private String age;
+    private Age age;
 
     /**
      * Description of product. EX. 'Почувствуйте анатомическую форму нового налокотника Supreme 1S благодаря комп...'

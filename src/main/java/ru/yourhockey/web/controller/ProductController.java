@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product.Product;
+import ru.yourhockey.model.product_attributes.Age;
 import ru.yourhockey.service.BrandService;
 import ru.yourhockey.service.ProductService;
 import ru.yourhockey.service.TypeService;
@@ -44,23 +45,16 @@ public class ProductController {
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
-        long start1 = System.currentTimeMillis();
         String inStock = requestParams.remove("inStock");
         FilterAndPageable pairOfParamsAndPageable = validator.validate(requestParams, pageable, Product.class);
+        pairOfParamsAndPageable = validator.validateAgeParam(pairOfParamsAndPageable);
         List<Product> products;
-        long end1 = System.currentTimeMillis() - start1;
-        log.info("Time to validate: {}", end1);
         //ToDo вынести instock обработку в сервис и в более приличный вид
-        long start2 = System.currentTimeMillis();
-        long end2, end3;
         if (inStock != null && inStock.equalsIgnoreCase("true")) {
             products = productService.getAllByParameters(
                     pairOfParamsAndPageable.getFilter(),
                     pairOfParamsAndPageable.getPageable()
             );
-            end2 = System.currentTimeMillis() - start2;
-            log.info("Time to prodServ#getAllByParams inStock: {}", end2);
-            long start3 = System.currentTimeMillis();
             products = products.stream()
                     .peek(p -> {
                         Set<Offer> offers = p.getOffer();
@@ -69,22 +63,12 @@ public class ProductController {
                     })
                     .filter(p -> !p.getOffer().isEmpty())
                     .collect(Collectors.toList());
-            end3 = System.currentTimeMillis() - start3;
-            log.info("Time to filter product offers: {}", end3);
         } else {
             pairOfParamsAndPageable.getFilter().remove("offer.price");
             products = productService.getAllByParameters(pairOfParamsAndPageable.getFilter(), pairOfParamsAndPageable.getPageable());
-            end2 = System.currentTimeMillis() - start2;
-            log.info("Time to prodServ#getAllByParams not inStock: {}", end2);
-            end3 = 0;
         }
 
-        long start4 = System.currentTimeMillis();
-        List<ProductDto> res = products.stream().map(productMapper::map).collect(Collectors.toList());
-        long end4 = System.currentTimeMillis() - start4;
-        log.info("Time to map entities to dto: {}", end4);
-        log.info("Total: {}", end1 + end2 + end3 + end4);
-        return res;
+        return products.stream().map(productMapper::map).collect(Collectors.toList());
     }
 
     @CrossOrigin
@@ -94,7 +78,7 @@ public class ProductController {
                 .setModel(body.get("model"))
                 .setBrand(brandService.getByShortName(body.get("brandShortName")))
                 .setType(typeService.findByShowName(body.get("typeShowName")).orElseThrow(TypeNotFoundException::new))
-                .setAge(body.get("age"))
+                .setAge(Age.of(body.get("age")))
                 .setDescription(body.get("description"))
                 .setSrcImageLink(body.get("srcImageLink"));
         return productService.troubleTicketCreateProduct(product).getProductId();

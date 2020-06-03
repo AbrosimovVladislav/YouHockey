@@ -22,7 +22,7 @@ public class MatcherProductMapper {
                 .setModel(product.getModel())
                 .setBrand(product.getBrand().getShortName())
                 .setType(product.getType())
-                .setAge(product.getAge())
+                .setAge(product.getAge().name())
                 .setLink(product.getLink());
     }
 

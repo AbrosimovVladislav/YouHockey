@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -30,7 +31,7 @@ public class ImageLoader {
      */
     public List<String> loadImages() {
         List<Product> products = productRepo.findAll();
-
+        List<String> loadedImgLinks = new ArrayList<>();
         // TODO: проход и скачивание по тем, у кого есть срцИмгЛинк, но нет имгЛинк
         for (Product product : products) {
             String type = product.getType().getShowName().replaceAll("/","-");
@@ -44,11 +45,12 @@ public class ImageLoader {
                 String imgPath = imgDirName + "/" + type + "/" + imgName;
                 FileCopyUtils.copy(url.openStream(), new FileOutputStream(imgPath));
                 product.setImageLink(imgPath);
+                loadedImgLinks.add(imgPath);
             } catch (IOException e) {
                 log.error("Image downloading failed [srcImageLink={}; {}]", product.getSrcImageLink(), e.getMessage());
             }
         }
         productRepo.saveAll(products);
-        return List.of();
+        return loadedImgLinks;
     }
 }
