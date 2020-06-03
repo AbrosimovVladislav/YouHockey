@@ -19,5 +19,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://161.35.70.99:5432/matchingservice</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="yourhockey@161.35.70.99" uuid="3f37cdf4-00d4-4460-a348-28cc4ae6cc51">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://161.35.70.99:5432/yourhockey</jdbc-url>
+    </data-source>
   </component>
 </project>
