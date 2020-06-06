@@ -12,6 +12,7 @@ public enum Operation {
         @Override
         public Predicate getPredicate(String paramName, String qbParamValue, CriteriaBuilder criteriaBuilder, Path path) {
             if (paramName.equalsIgnoreCase("age")) return criteriaBuilder.equal(path, Age.of(qbParamValue));
+            if (paramName.equalsIgnoreCase("inStock")) return criteriaBuilder.equal(path, Boolean.parseBoolean(qbParamValue));
             return criteriaBuilder.equal(path, qbParamValue);
         }
     },

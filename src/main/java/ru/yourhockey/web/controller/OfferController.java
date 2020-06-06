@@ -14,7 +14,7 @@ import ru.yourhockey.web.mapper.OfferMapper;
 import ru.yourhockey.web.validation.RequestParamsValidator;
 import ru.yourhockey.web.webentities.FilterAndPageable;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +45,8 @@ public class OfferController {
     public List<Offer> getByProductId(@PathVariable String productId,
                                       @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                               Pageable pageable) {
-        FilterAndPageable pairOfParamsAndPageable = validator.validate(Collections.singletonMap("product.productId", productId), pageable, Offer.class);
+        FilterAndPageable pairOfParamsAndPageable = validator.validate(new HashMap<>(Map.of("product.productId", productId)), pageable, Offer.class);
+        pairOfParamsAndPageable.getFilter().put("inStock", "true");
         return offerService.getAllByParameters(pairOfParamsAndPageable.getFilter(),
                 pairOfParamsAndPageable.getPageable()
         );
