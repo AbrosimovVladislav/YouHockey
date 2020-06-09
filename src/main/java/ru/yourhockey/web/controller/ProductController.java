@@ -46,6 +46,7 @@ public class ProductController {
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
         String inStock = requestParams.remove("inStock");
+        String priceFilter = requestParams.get("offer.price");
         FilterAndPageable pairOfParamsAndPageable = validator.validate(requestParams, pageable, Product.class);
         pairOfParamsAndPageable = validator.validateAgeParam(pairOfParamsAndPageable);
         List<Product> products;
@@ -58,7 +59,19 @@ public class ProductController {
             products = products.stream()
                     .peek(p -> {
                         Set<Offer> offers = p.getOffer();
-                        offers = offers.stream().filter(Offer::isInStock).filter(o -> o.getPrice() > 0).collect(Collectors.toSet());
+                        offers = offers.stream()
+                                .filter(Offer::isInStock)
+                                .filter(o -> o.getPrice() > 0)
+                                .filter(o -> {
+                                    if (priceFilter != null) {
+                                        double min = Double.parseDouble(priceFilter.split("interval")[0]);
+                                        double max = Double.parseDouble(priceFilter.split("interval")[1]);
+                                        return o.getPrice() >= min && o.getPrice() <= max;
+                                    } else {
+                                        return true;
+                                    }
+                                })
+                                .collect(Collectors.toSet());
                         p.setOffer(offers);
                     })
                     .filter(p -> !p.getOffer().isEmpty())
