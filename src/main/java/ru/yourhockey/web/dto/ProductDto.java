@@ -23,5 +23,6 @@ public class ProductDto {
     private String imageLink;
     private Rating rating;
     private Double minPrice;
+    private Double maxPrice;
     private Integer offerQuantity;
 }

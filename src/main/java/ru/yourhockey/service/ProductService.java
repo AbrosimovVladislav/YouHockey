@@ -17,11 +17,15 @@ public class ProductService {
     private final ProductRepo productRepo;
     private final OfferService offerService;
 
-    public List<Product> recalculateMinPrice() {
+    public List<Product> recalculateMinMaxPrice() {
         List<Product> all = productRepo.findAll();
         return all.stream()
                 .filter(p -> p.getOffer() != null && !p.getOffer().isEmpty())
-                .map(p -> productRepo.save(p.setMinPrice(offerService.calculateMinPriceByProduct(p.getProductId()))))
+                .map(p -> {
+                    p.setMinPrice(offerService.calculateMinPriceByProduct(p.getProductId()));
+                    p.setMaxPrice(offerService.calculateMaxPriceByProduct(p.getProductId()));
+                    return productRepo.save(p);
+                })
                 .collect(Collectors.toList());
     }
 

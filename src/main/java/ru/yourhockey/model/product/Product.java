@@ -100,6 +100,7 @@ public class Product implements BasicEntity {
     private Set<Offer> offer = new HashSet<>();
 
     private Double minPrice;
+    private Double maxPrice;
 
     @JsonIgnore
     @OneToMany(mappedBy = PRODUCT_TABLE)
@@ -123,6 +124,7 @@ public class Product implements BasicEntity {
                 ", imageLink='" + imageLink + '\'' +
                 ", rating=" + (rating != null ? rating.getValue() : "null") +
                 ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
                 ", review=" + review.stream().map(Review::getMark).collect(Collectors.toList()) +
                 ", reviewCount=" + reviewCount +
                 '}';

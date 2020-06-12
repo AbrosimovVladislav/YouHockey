@@ -31,4 +31,8 @@ public class OfferService {
     public Double calculateMinPriceByProduct(Long productId) {
         return offerRepo.calculateMinPriceByProduct(productId);
     }
+
+    public Double calculateMaxPriceByProduct(Long productId) {
+        return offerRepo.calculateMaxPriceByProduct(productId);
+    }
 }

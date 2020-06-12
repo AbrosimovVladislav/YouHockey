@@ -57,7 +57,7 @@ public class OfferController {
         List<Offer> offers = offerMapper.mapToOffer(body);
         offerService.deleteAll();
         List<Offer> savedOffers = offerService.saveAll(offers);
-        productService.recalculateMinPrice();
+        productService.recalculateMinMaxPrice();
         return ResponseEntity.ok(offerMapper.mapToOfferDto(savedOffers));
     }
 
