@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class TypeController {
+public class TypeApiController implements TypeApi {
 
     private final TypeService typeService;
 
