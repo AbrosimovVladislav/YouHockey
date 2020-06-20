@@ -32,6 +32,6 @@ jobs:
         echo "Github username: ${GITHUB_ACTOR}"
         PAYLOAD=$(find target -maxdepth 1 -name *.jar)
         echo "Send ${PAYLOAD} to Gilberto"
-        curl -F 'payload=@${PAYLOAD}' http://test.yourhockey.ru:9091/artifact
+        curl -F 'payload=@$(PAYLOAD)' http://test.yourhockey.ru:9091/artifact
       # The GITHUB_REF tag comes in the format 'refs/tags/xxx'.
       # If we split on '/' and take the 3rd value, we can get the release name.
