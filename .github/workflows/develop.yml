@@ -30,7 +30,7 @@ jobs:
         NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
         echo "New version: ${NEW_VERSION}"
         echo "Github username: ${GITHUB_ACTOR}"
-        PAYLOAD=$(ls target | grep '.jar$')
+        PAYLOAD=$(find target -maxdepth 1 -name *.jar)
         echo "Send ${PAYLOAD} to Gilberto"
         curl -F 'payload=@${PAYLOAD}' http://test.yourhockey.ru:9091/artifact
       # The GITHUB_REF tag comes in the format 'refs/tags/xxx'.
