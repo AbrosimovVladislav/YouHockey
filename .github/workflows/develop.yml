@@ -30,6 +30,7 @@ jobs:
         NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
         echo "New version: ${NEW_VERSION}"
         echo "Github username: ${GITHUB_ACTOR}"
+        ls
         cd target | ls | grep jar
         PAYLOAD=$(cd target | ls | grep jar)
         echo "Send ${PAYLOAD} to Gilberto"
