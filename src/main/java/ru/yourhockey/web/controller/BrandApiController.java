@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class BrandController {
+public class BrandApiController implements BrandApi {
 
     private final BrandService brandService;
 

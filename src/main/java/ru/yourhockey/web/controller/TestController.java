@@ -19,11 +19,6 @@ public class TestController {
     private final ProductRepo productRepo;
     private final ProductMapper productMapper;
 
-    @GetMapping("/")
-    public String index() {
-        return "redirect:index.html";
-    }
-
     @CrossOrigin
     @GetMapping("/test/{x}")
     public List<ProductDto> test(@PathVariable int x) {

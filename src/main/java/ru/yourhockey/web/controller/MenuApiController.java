@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class MenuController {
+public class MenuApiController implements MenuApi {
 
     private final MenuService menuService;
 

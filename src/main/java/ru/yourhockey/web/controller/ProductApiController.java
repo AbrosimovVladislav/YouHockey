@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class ProductController {
+public class ProductApiController implements ProductApi {
 
     private final ProductService productService;
     private final RequestParamsValidator validator;

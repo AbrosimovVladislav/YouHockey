@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class OfferController {
+public class OfferApiController implements OfferApi {
 
     private final OfferService offerService;
     private final RequestParamsValidator validator;

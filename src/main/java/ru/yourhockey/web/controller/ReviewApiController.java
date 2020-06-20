@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ReviewController {
+public class ReviewApiController implements ReviewApi {
 
     private final ReviewService reviewService;
     private final RequestParamsValidator validator;

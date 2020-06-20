@@ -9,7 +9,7 @@ import ru.yourhockey.service.ImageService;
 @RestController
 @RequestMapping("/images")
 @RequiredArgsConstructor
-public class ImageController {
+public class ImageApiController implements ImageApi {
     private final ImageService imageService;
 
     @CrossOrigin

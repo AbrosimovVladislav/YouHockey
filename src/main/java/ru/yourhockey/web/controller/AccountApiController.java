@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-public class AccountController {
+public class AccountApiController implements AccountApi {
 
     private final AccountService accountService;
 
