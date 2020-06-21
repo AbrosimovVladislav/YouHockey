@@ -7,7 +7,7 @@ mvn clean package
 cp target/ScrappingService.jar /opt/prod/ScrappingService.jar
 
 cd /root/MatchingService
-git checkout master
+git checkout develop
 git pull
 systemctl stop matching.service
 cp matching.service /etc/systemd/system/matching.service
@@ -22,7 +22,7 @@ mvn clean package
 cp target/TroubleTicket.jar /opt/prod/TroubleTicket.jar
 
 cd /root/YouHockey
-git checkout master
+git checkout develop
 git pull
 systemctl stop youhockey.service
 cp youhockey.service /etc/systemd/system/youhockey.service
