@@ -14,6 +14,13 @@ cp matching.service /etc/systemd/system/matching.service
 mvn clean package
 cp target/MatchingService.jar /opt/prod/MatchingService.jar
 
+cd /root/TroubleTicketService
+git checkout master
+git pull
+systemctl stop tt.service
+mvn clean package
+cp target/TroubleTicket.jar /opt/prod/TroubleTicket.jar
+
 cd /root/YouHockey
 git checkout master
 git pull
@@ -25,6 +32,7 @@ cp target/YourHockey.jar /opt/prod/YourHockey.jar
 sudo systemctl daemon-reload
 systemctl start youhockey.service
 systemctl start matching.service
+systemctl start tt.service
 systemctl start scrapping.service
 
 cd /root/JackNorthon
