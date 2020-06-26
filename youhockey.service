@@ -5,6 +5,7 @@ Description=YouHockey
 WorkingDirectory=/opt/prod
 ExecStart=/usr/bin/java -Xms128m -Xmx256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/root -jar YourHockey.jar
 Type=simple
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
