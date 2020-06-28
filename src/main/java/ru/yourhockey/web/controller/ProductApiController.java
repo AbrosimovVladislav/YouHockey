@@ -47,6 +47,7 @@ public class ProductApiController implements ProductApi {
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
         String inStock = requestParams.remove("inStock");
         String priceFilter = requestParams.get("offer.price");
+        //ToDo переименовать в sort and page extractor
         FilterAndPageable pairOfParamsAndPageable = validator.validate(requestParams, pageable, Product.class);
         pairOfParamsAndPageable = validator.validateAgeParam(pairOfParamsAndPageable);
         List<Product> products;
