@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class QueryBuilder {
+    /**
+     * This is used to avoid multiple `join` on the same table.
+     */
     private final Map<String, Path> pathCache;
     private final QBParamExtractor qbParamExtractor;
 
