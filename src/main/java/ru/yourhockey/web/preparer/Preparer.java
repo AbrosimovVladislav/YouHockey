@@ -1,4 +1,4 @@
-package ru.yourhockey.web.webentities;
+package ru.yourhockey.web.preparer;
 
 import ru.yourhockey.model.BasicEntity;
 

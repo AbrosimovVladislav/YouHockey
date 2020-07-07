@@ -1,4 +1,4 @@
-package ru.yourhockey.web.webentities;
+package ru.yourhockey.web.preparer;
 
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.BasicEntity;

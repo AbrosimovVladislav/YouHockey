@@ -10,9 +10,8 @@ import ru.yourhockey.model.product_attributes.Review;
 import ru.yourhockey.service.ReviewService;
 import ru.yourhockey.web.dto.ReviewDto;
 import ru.yourhockey.web.mapper.ReviewMapper;
-import ru.yourhockey.web.validation.RequestParamsValidator;
-import ru.yourhockey.web.webentities.FilterAndPageable;
-import ru.yourhockey.web.webentities.Preparer;
+import ru.yourhockey.web.preparer.FilterAndPageable;
+import ru.yourhockey.web.preparer.Preparer;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.List;
 public class ReviewApiController implements ReviewApi {
 
     private final ReviewService reviewService;
-    private final RequestParamsValidator validator;
     private final ReviewMapper reviewMapper;
     private final List<Preparer> preparers;
 

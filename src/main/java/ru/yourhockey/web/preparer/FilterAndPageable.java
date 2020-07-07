@@ -1,4 +1,4 @@
-package ru.yourhockey.web.webentities;
+package ru.yourhockey.web.preparer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

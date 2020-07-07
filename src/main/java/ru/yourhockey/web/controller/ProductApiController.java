@@ -17,9 +17,8 @@ import ru.yourhockey.web.dto.MatcherProductDto;
 import ru.yourhockey.web.dto.ProductDto;
 import ru.yourhockey.web.mapper.MatcherProductMapper;
 import ru.yourhockey.web.mapper.ProductMapper;
-import ru.yourhockey.web.validation.RequestParamsValidator;
-import ru.yourhockey.web.webentities.FilterAndPageable;
-import ru.yourhockey.web.webentities.Preparer;
+import ru.yourhockey.web.preparer.FilterAndPageable;
+import ru.yourhockey.web.preparer.Preparer;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ import java.util.stream.Collectors;
 public class ProductApiController implements ProductApi {
 
     private final ProductService productService;
-    private final RequestParamsValidator validator;
     private final ProductMapper productMapper;
     private final MatcherProductMapper matcherProductMapper;
     private final BrandService brandService;
@@ -68,7 +66,6 @@ public class ProductApiController implements ProductApi {
         return productService.troubleTicketCreateProduct(product).getProductId();
     }
 
-    //ToDo переделать в один контроллер с сущностью с динамическим наполнением полей (см SimCardInfo в BEP)
     @CrossOrigin
     @GetMapping(value = "/allProducts", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MatcherProductDto>> getAll() {

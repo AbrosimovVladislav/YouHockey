@@ -3,9 +3,7 @@ package ru.yourhockey.model.offer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.product.Product;
@@ -48,6 +46,7 @@ public class Offer implements BasicEntity {
     private Shop shop;
 
     @Column(name = OFFER_PRICE, nullable = false)
+    @Min(value = 0, message = "Offer price cannot be lower than 0")
     private double price;
 
     @Column(name = OFFER_IN_STOCK, nullable = false)

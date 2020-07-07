@@ -9,6 +9,7 @@ import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product_attributes.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -99,6 +100,7 @@ public class Product implements BasicEntity {
     @OneToMany(mappedBy = PRODUCT_TABLE)
     private Set<Offer> offer = new HashSet<>();
 
+    @Min(value = 0, message = "Product minPrice cannot be lower than 0")
     private Double minPrice;
     private Double maxPrice;
 

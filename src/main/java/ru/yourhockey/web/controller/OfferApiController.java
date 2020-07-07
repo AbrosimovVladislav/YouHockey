@@ -7,14 +7,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.offer.Offer;
-import ru.yourhockey.model.product.Product;
 import ru.yourhockey.service.OfferService;
 import ru.yourhockey.service.ProductService;
 import ru.yourhockey.web.dto.OfferDto;
 import ru.yourhockey.web.mapper.OfferMapper;
-import ru.yourhockey.web.validation.RequestParamsValidator;
-import ru.yourhockey.web.webentities.FilterAndPageable;
-import ru.yourhockey.web.webentities.Preparer;
+import ru.yourhockey.web.preparer.FilterAndPageable;
+import ru.yourhockey.web.preparer.Preparer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +23,6 @@ import java.util.Map;
 public class OfferApiController implements OfferApi {
 
     private final OfferService offerService;
-    private final RequestParamsValidator validator;
     private final OfferMapper offerMapper;
     private final ProductService productService;
     private final List<Preparer> preparers;

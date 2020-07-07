@@ -147,6 +147,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.2.6.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.2.6.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.6.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.h2database:h2:1.4.200" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.200" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-csv:1.4" level="project" />
   </component>
 </module>
