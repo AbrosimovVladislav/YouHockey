@@ -45,7 +45,7 @@ public class ProductApiController implements ProductApi {
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
-        String inStock = requestParams.remove("inStock");
+        String inStock = requestParams.remove("offer.inStock");
         String priceFilter = requestParams.get("offer.price");
         FilterAndPageable pairOfParamsAndPageable = validator.validate(requestParams, pageable, Product.class);
         pairOfParamsAndPageable = validator.validateAgeParam(pairOfParamsAndPageable);
