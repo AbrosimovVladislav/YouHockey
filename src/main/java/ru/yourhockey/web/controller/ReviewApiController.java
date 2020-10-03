@@ -5,12 +5,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Review;
 import ru.yourhockey.service.ReviewService;
 import ru.yourhockey.web.dto.ReviewDto;
 import ru.yourhockey.web.mapper.ReviewMapper;
-import ru.yourhockey.web.validation.RequestParamsValidator;
-import ru.yourhockey.web.webentities.FilterAndPageable;
+import ru.yourhockey.web.preparer.FilterAndPageable;
+import ru.yourhockey.web.preparer.Preparer;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,8 +22,8 @@ import java.util.List;
 public class ReviewApiController implements ReviewApi {
 
     private final ReviewService reviewService;
-    private final RequestParamsValidator validator;
     private final ReviewMapper reviewMapper;
+    private final List<Preparer> preparers;
 
     private static final int DEFAULT_PAGE_NUMBER = 0;
     private static final int DEFAULT_PAGE_SIZE = 10;
@@ -31,10 +32,11 @@ public class ReviewApiController implements ReviewApi {
     public List<Review> getAllByProductId(@PathVariable String productId,
                                           @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                                   Pageable pageable) {
-        FilterAndPageable pairOfParamsAndPageable =
-                validator.validate(Collections.singletonMap("product.productId", productId), pageable, Review.class);
-        return reviewService.getAllByParameters(pairOfParamsAndPageable.getFilter(),
-                pairOfParamsAndPageable.getPageable()
+        FilterAndPageable filterAndPageable = new FilterAndPageable(Collections.singletonMap("product.productId", productId), pageable);
+        preparers.forEach(preparer -> preparer.prepare(filterAndPageable, Product.class));
+
+        return reviewService.getAllByParameters(filterAndPageable.getFilter(),
+                filterAndPageable.getPageable()
         );
     }
 
@@ -42,10 +44,11 @@ public class ReviewApiController implements ReviewApi {
     public List<Review> getAllByShopId(@PathVariable String shopId,
                                        @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                                Pageable pageable) {
-        FilterAndPageable pairOfParamsAndPageable =
-                validator.validate(Collections.singletonMap("shop.shopId", shopId), pageable, Review.class);
-        return reviewService.getAllByParameters(pairOfParamsAndPageable.getFilter(),
-                pairOfParamsAndPageable.getPageable()
+        FilterAndPageable filterAndPageable = new FilterAndPageable(Collections.singletonMap("shop.shopId", shopId), pageable);
+        preparers.forEach(preparer -> preparer.prepare(filterAndPageable, Product.class));
+
+        return reviewService.getAllByParameters(filterAndPageable.getFilter(),
+                filterAndPageable.getPageable()
         );
     }
 

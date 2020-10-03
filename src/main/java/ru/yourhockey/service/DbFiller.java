@@ -2,6 +2,7 @@ package ru.yourhockey.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.filtration.FilterItem;
 import ru.yourhockey.model.filtration.KeyPath;
@@ -9,6 +10,7 @@ import ru.yourhockey.model.filtration.KeyPath;
 import java.util.List;
 
 @Component
+@Profile("!test")
 @RequiredArgsConstructor
 public class DbFiller implements InitializingBean {
 
@@ -20,7 +22,7 @@ public class DbFiller implements InitializingBean {
 
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         createKeyPaths();
         createFilterTypes();
     }
@@ -41,12 +43,6 @@ public class DbFiller implements InitializingBean {
     }
 
     private void createKeyPaths() {
-/*
-        PRICE
-        BRAND
-        TYPE ???
-        AGE
-*/
         String productSource = "product";
         keyPaths.add(new KeyPath().setKeyPathId(1L).setSource(productSource).setTargetEntity("offer").setTargetParam("price").setValue("offer.price"));
         keyPaths.add(new KeyPath().setKeyPathId(2L).setSource(productSource).setTargetEntity("brand").setTargetParam("short_name").setValue("brand.shortName"));
@@ -54,15 +50,3 @@ public class DbFiller implements InitializingBean {
         keyPaths.forEach(keyPathService::create);
     }
 }
-
-
-/*-- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
-INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','offer','price','offer.price')ON CONFLICT (value) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (1,'КОНЬКИ','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (2,'ЗАЩИТА_ИГРОКА','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (3,'КЛЮШКИ','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (4,'ОДЕЖДА','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (5,'ВРАТАРСКАЯ_ФОРМА','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (6,'СУМКИ','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (7,'АКСЕССУАРЫ','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;
-INSERT INTO filter_item (filter_item_id, menu_item, name, type, key_path_id, rank) VALUES (8,'РАЗНОЕ','Цена', 'RANGE', 1,1) ON CONFLICT (filter_item_id) DO NOTHING;;*/

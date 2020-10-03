@@ -16,7 +16,10 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class QueryBuilder {
-
+    /**
+     * This is used to avoid multiple `join` on the same table.
+     */
+    private final Map<String, Path> pathCache;
     private final QBParamExtractor qbParamExtractor;
 
     public <BE extends BasicEntity> CriteriaQuery<BE> createCriteriaQueryFromParamMap(CriteriaBuilder criteriaBuilder,
@@ -52,9 +55,14 @@ public class QueryBuilder {
         if (entities.isEmpty()) {
             path = root.get(paramName);
         } else {
-            path = root.join(entities.get(0));
+            String rootEntityName = entities.get(0);
+            path = pathCache.computeIfAbsent(rootEntityName, root::join);
             for (int i = 1; i < entities.size(); i++) {
-                path = ((Join) path).join(entities.get(i));
+                String childEntityName = entities.get(i);
+                if (pathCache.get(childEntityName) == null) {
+                    path = ((Join) path).join(childEntityName);
+                    pathCache.put(childEntityName, path);
+                }
             }
             path = path.get(paramName);
         }
@@ -80,9 +88,9 @@ public class QueryBuilder {
         Path sortingPath = buildPath(propertyName, entitiesAndPropertyName, root);
         cq = buildGroupByExpression(cq, root, new ArrayList<>(sortProperties));
         return cq.orderBy(
-            sortingOrder.isAscending()
-                ? criteriaBuilder.asc(sortingPath)
-                : criteriaBuilder.desc(sortingPath)
+                sortingOrder.isAscending()
+                        ? criteriaBuilder.asc(sortingPath)
+                        : criteriaBuilder.desc(sortingPath)
         );
     }
 

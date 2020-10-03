@@ -1,0 +1,61 @@
+{
+	"id": "006cc61d-0b0d-a0ac-7f85-b897bf0045ee",
+	"name": "YourHockey",
+	"description": "",
+	"order": [
+		"8f3293fd-870a-b5e2-46dc-8742d90d507d",
+		"e7d12b75-d37d-015d-effd-f23a937b8e83"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1593339543199,
+	"owner": "5844039",
+	"public": false,
+	"requests": [
+		{
+			"id": "8f3293fd-870a-b5e2-46dc-8742d90d507d",
+			"headers": "",
+			"headerData": [],
+			"url": "",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "006cc61d-0b0d-a0ac-7f85-b897bf0045ee",
+			"data": null,
+			"dataMode": "params",
+			"name": "Products (minPrice)",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1593339574563,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "e7d12b75-d37d-015d-effd-f23a937b8e83",
+			"headers": "",
+			"headerData": [],
+			"url": "{{url}}{{productsPath}}?",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1593339788224,
+			"name": "Products (manyArgs)",
+			"description": "",
+			"collectionId": "006cc61d-0b0d-a0ac-7f85-b897bf0045ee",
+			"responses": []
+		}
+	]
+}

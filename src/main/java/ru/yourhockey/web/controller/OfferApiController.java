@@ -11,8 +11,8 @@ import ru.yourhockey.service.OfferService;
 import ru.yourhockey.service.ProductService;
 import ru.yourhockey.web.dto.OfferDto;
 import ru.yourhockey.web.mapper.OfferMapper;
-import ru.yourhockey.web.validation.RequestParamsValidator;
-import ru.yourhockey.web.webentities.FilterAndPageable;
+import ru.yourhockey.web.preparer.FilterAndPageable;
+import ru.yourhockey.web.preparer.Preparer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.Map;
 public class OfferApiController implements OfferApi {
 
     private final OfferService offerService;
-    private final RequestParamsValidator validator;
     private final OfferMapper offerMapper;
     private final ProductService productService;
+    private final List<Preparer> preparers;
 
     private static final int DEFAULT_PAGE_NUMBER = 0;
     private static final int DEFAULT_PAGE_SIZE = 10;
@@ -34,9 +34,12 @@ public class OfferApiController implements OfferApi {
     public List<Offer> getAllByParams(@RequestParam Map<String, String> requestParams,
                                       @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                               Pageable pageable) {
-        FilterAndPageable pairOfParamsAndPageable = validator.validate(requestParams, pageable, Offer.class);
-        return offerService.getAllByParameters(pairOfParamsAndPageable.getFilter(),
-                pairOfParamsAndPageable.getPageable()
+
+        FilterAndPageable filterAndPageable = new FilterAndPageable(requestParams, pageable);
+        preparers.forEach(preparer -> preparer.prepare(filterAndPageable, Offer.class));
+
+        return offerService.getAllByParameters(filterAndPageable.getFilter(),
+                filterAndPageable.getPageable()
         );
     }
 
@@ -45,10 +48,12 @@ public class OfferApiController implements OfferApi {
     public List<Offer> getByProductId(@PathVariable String productId,
                                       @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER)
                                               Pageable pageable) {
-        FilterAndPageable pairOfParamsAndPageable = validator.validate(new HashMap<>(Map.of("product.productId", productId)), pageable, Offer.class);
-        pairOfParamsAndPageable.getFilter().put("inStock", "true");
-        return offerService.getAllByParameters(pairOfParamsAndPageable.getFilter(),
-                pairOfParamsAndPageable.getPageable()
+        FilterAndPageable filterAndPageable = new FilterAndPageable(new HashMap<>(Map.of("product.productId", productId)), pageable);
+        preparers.forEach(preparer -> preparer.prepare(filterAndPageable, Offer.class));
+
+        filterAndPageable.getFilter().put("inStock", "true");
+        return offerService.getAllByParameters(filterAndPageable.getFilter(),
+                filterAndPageable.getPageable()
         );
     }
 
