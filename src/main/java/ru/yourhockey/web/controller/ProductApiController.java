@@ -88,6 +88,5 @@ public class ProductApiController implements ProductApi {
 
     public void updateCommitMethod(){
         System.out.println("Hello");
-        System.out.println("Hello");
     }
 }
