@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
-          source: "$(find target -maxdepth 1 -name *.jar)"
+          source: "target/*.jar"
           target: "/opt/prod"
       - name: Start App
         uses: appleboy/ssh-action@master
