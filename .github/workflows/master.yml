@@ -25,13 +25,6 @@ jobs:
           postgresql password: root
       - name: Build with Maven
         run: mvn -B package
-      - name: Temp step with almost dead Gilberto
-        run: |
-          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-          echo "New version: ${NEW_VERSION}"
-          echo "Github username: ${GITHUB_ACTOR}"
-          PAYLOAD=$(find target -maxdepth 1 -name *.jar)
-          echo "Send ${PAYLOAD} to Gilberto"
       - name: Copy Jar via SSH
         uses: appleboy/scp-action@master
         with:
