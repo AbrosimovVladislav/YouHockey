@@ -85,4 +85,8 @@ public class ProductApiController implements ProductApi {
     public ResponseEntity<List<ProductDto>> search(@RequestParam String searchLine) {
         return ResponseEntity.ok(productMapper.mapList(productService.search(searchLine)));
     }
+
+    public void updateCommitMethod(){
+        System.out.println("Hello");
+    }
 }
