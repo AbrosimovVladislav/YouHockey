@@ -519,7 +519,7 @@ INSERT INTO shop (name, website) VALUES ('ALLHOCKEY', 'https://allhockey24.ru') 
 INSERT INTO shop (name, website) VALUES ('FORMASPB', 'https://forma-spb.ru') ON CONFLICT (website) DO NOTHING;;
 INSERT INTO shop (name, website) VALUES ('KLUSHKI', 'https://klushki.com//') ON CONFLICT (website) DO NOTHING;;
 --this shop was added to db by hands, check why it is that
-INSERT INTO shop (name, website) VALUES ('NORDHOCKEY', 'https://www.nordhockey.ru') ON CONFLICT (website) DO NOTHING;;
+-- INSERT INTO shop (name, website) VALUES ('NORDHOCKEY', 'https://www.nordhockey.ru') ON CONFLICT (website) DO NOTHING;;
 
 /*-- ----------------------------------------------------------------1 PRICE---------------------------------------------------------
 INSERT INTO key_path (source, target_entity, target_param, value) VALUES ('product','offer','price','offer.price')ON CONFLICT (value) DO NOTHING;;
