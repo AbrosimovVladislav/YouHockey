@@ -1,15 +1,16 @@
 server:
   port: 8082
+
 spring:
-  banner:
-    location=banner.txt:
-  datasource:
-    username: postgres
-    password: root
-    url: jdbc:postgresql://localhost:5432/yourhockey
-    driver-class-name: org.postgresql.Driver
-    initialization-mode: always
-    separator: ;;
+  banner: location=banner.txt
+
+datasource:
+  username: postgres
+  password: root
+  url: jdbc:postgresql://localhost:5432/yourhockey
+  driver-class-name: org.postgresql.Driver
+  initialization-mode: always
+  separator: ;;
   jpa:
     database: postgresql
     hibernate:
@@ -19,8 +20,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         jdbc.lob.non_contextual_creation: true
         format_sql: true
+
 logging:
   file:
     name: yourhockey-app.log
 
 product.photo.dir: images
+
