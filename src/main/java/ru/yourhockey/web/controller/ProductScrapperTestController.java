@@ -1,10 +1,12 @@
-package ru.yourhockey.service.initialProductScrapper;
+package ru.yourhockey.web.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.yourhockey.model.product.Product;
+import ru.yourhockey.service.initialProductScrapper.ImageLoader;
+import ru.yourhockey.service.initialProductScrapper.ProductScrapper;
 
 import java.util.List;
 
