@@ -37,7 +37,7 @@ public class ImageLoader {
             String type = product.getType().getShowName().replaceAll("/","-");
             String imgName = product.getBrand().getShortName() + "_" + product.getModel() + "_" + product.getAge() + ".png";
             try {
-                var url = new URL("http:" + product.getSrcImageLink());
+                var url = new URL("http://" + "opt-1274418.ssl.1c-bitrix-cdn.ru" + product.getSrcImageLink());
                 String imgDirName = System.getProperty("user.home") + "/" + imgDir;
                 if (Files.notExists(Paths.get(imgDirName)))
                     Files.createDirectory(Paths.get(imgDirName)); // redundant perhaps
