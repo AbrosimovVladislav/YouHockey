@@ -4,13 +4,13 @@ server:
 spring:
   banner: location=banner.txt
 
-datasource:
-  username: postgres
-  password: root
-  url: jdbc:postgresql://localhost:5432/yourhockey
-  driver-class-name: org.postgresql.Driver
-  initialization-mode: always
-  separator: ;;
+  datasource:
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/yourhockey
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+    separator: ;;
   jpa:
     database: postgresql
     hibernate:
