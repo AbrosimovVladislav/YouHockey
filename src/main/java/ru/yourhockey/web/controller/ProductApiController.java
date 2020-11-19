@@ -43,6 +43,9 @@ public class ProductApiController implements ProductApi {
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
+
+        log.info("Incoming request. Params {}. Pageable {}",requestParams,pageable);
+
         FilterAndPageable filterAndPageable = new FilterAndPageable(requestParams, pageable);
         preparers.forEach(preparer -> preparer.prepare(filterAndPageable, Product.class));
 
