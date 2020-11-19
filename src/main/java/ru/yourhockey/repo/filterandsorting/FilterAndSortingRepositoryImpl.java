@@ -2,6 +2,7 @@ package ru.yourhockey.repo.filterandsorting;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.internal.QueryImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import ru.yourhockey.model.BasicEntity;
@@ -32,6 +33,12 @@ public class FilterAndSortingRepositoryImpl<BE extends BasicEntity> implements F
         queryBuilder.addSort(criteriaBuilder, criteriaQuery, pageable);
         TypedQuery<BE> typedQuery = entityManager.createQuery(criteriaQuery);
         typedQuery = addPagination(typedQuery, pageable);
+        try {
+            QueryImpl<BE> typedQuery1 = (QueryImpl<BE>) typedQuery;
+            log.info("SQL QUERY: {}", typedQuery1.getQueryString());
+        } catch (Exception e) {
+
+        }
         return typedQuery.getResultList();
     }
 
