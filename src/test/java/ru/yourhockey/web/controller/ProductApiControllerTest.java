@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -53,11 +54,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * https://docs.google.com/spreadsheets/d/1CUveJP_2wrWWrHqKbnBZsJHCOc-LGdwvf6Ui3ByP1aI/
  * EXCEL -> CSV -> read class
  */
+
+
 @Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
+@Disabled
 class ProductApiControllerTest {
     private static MockMvc staticMockMvc;
     private static JdbcTemplate staticJdbcTemplate;

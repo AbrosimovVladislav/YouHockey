@@ -35,6 +35,7 @@ public class Product implements BasicEntity {
     private static final String PRODUCT_SRC_IMAGE_LINK = "srcImageLink";
     public static final String PRODUCT_IMAGE_LINK = "imageLink";
     public static final String PRODUCT_RATING_ID = "ratingId";
+    public static final String PRODUCT_MIN_PRICE = "minPrice";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,10 +93,10 @@ public class Product implements BasicEntity {
     @Column(name = PRODUCT_IMAGE_LINK)
     private String imageLink;
 
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = PRODUCT_RATING_ID, referencedColumnName = PRODUCT_RATING_ID, unique = true)
-    private Rating rating;
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = PRODUCT_RATING_ID, referencedColumnName = PRODUCT_RATING_ID, unique = true)
+//    private Rating rating;
 
     @OneToMany(mappedBy = PRODUCT_TABLE)
     private Set<Offer> offer = new HashSet<>();
@@ -124,7 +125,7 @@ public class Product implements BasicEntity {
                 ", link='" + link + '\'' +
                 ", srcImageLink='" + srcImageLink + '\'' +
                 ", imageLink='" + imageLink + '\'' +
-                ", rating=" + (rating != null ? rating.getValue() : "null") +
+//                ", rating=" + (rating != null ? rating.getValue() : "null") +
                 ", minPrice=" + minPrice +
                 ", maxPrice=" + maxPrice +
                 ", review=" + review.stream().map(Review::getMark).collect(Collectors.toList()) +

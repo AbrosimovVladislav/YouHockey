@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product.Product;
-import ru.yourhockey.model.product_attributes.Rating;
 import ru.yourhockey.model.product_attributes.Review;
 
 @Component
@@ -29,7 +28,9 @@ public class SortPreparer implements Preparer {
         String sortingProperty = "";
         Sort.Direction dir = Sort.Direction.DESC;
         if (entityClass.isAssignableFrom(Product.class)) {
-            sortingProperty = Rating.RATING_VALUE_SORT;
+            // Temp solution WHILE rating not implemented
+            // sortingProperty = Rating.RATING_VALUE_SORT;
+            sortingProperty = Product.PRODUCT_MIN_PRICE;
         } else if (entityClass.isAssignableFrom(Offer.class)) {
             sortingProperty = Offer.OFFER_POPULARITY;
         } else if (entityClass.isAssignableFrom(Review.class)) {

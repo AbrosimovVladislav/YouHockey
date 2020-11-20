@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import ru.yourhockey.model.product_attributes.Brand;
-import ru.yourhockey.model.product_attributes.Rating;
 import ru.yourhockey.model.product_attributes.Type;
 
 
@@ -21,7 +20,7 @@ public class ProductDto {
     private String characteristics;
     private String link;
     private String imageLink;
-    private Rating rating;
+    //    private Rating rating;
     private Double minPrice;
     private Double maxPrice;
     private Integer offerQuantity;

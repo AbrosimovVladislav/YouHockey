@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
-import ru.yourhockey.model.product_attributes.Rating;
 import ru.yourhockey.model.product_attributes.Review;
 
 import javax.persistence.*;
@@ -50,8 +49,8 @@ public class Shop implements BasicEntity {
     @OneToMany(mappedBy = SHOP_TABLE)
     private Set<Review> review;
 
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = SHOP_RATING_ID, referencedColumnName = SHOP_RATING_ID)
-    private Rating rating;
+//    @JsonIgnore
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = SHOP_RATING_ID, referencedColumnName = SHOP_RATING_ID)
+//    private Rating rating;
 }

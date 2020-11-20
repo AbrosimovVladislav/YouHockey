@@ -31,7 +31,7 @@ public class ProductMapper {
                 .setCharacteristics(product.getCharacteristics())
                 .setLink(product.getLink())
                 .setImageLink(product.getImageLink())
-                .setRating(product.getRating())
+//                .setRating(product.getRating())
                 .setMinPrice(product.getMinPrice())
                 .setMaxPrice(product.getMaxPrice())
                 .setOfferQuantity(product.getOffer().size());
