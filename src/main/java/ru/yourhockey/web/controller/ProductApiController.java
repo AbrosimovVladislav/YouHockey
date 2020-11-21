@@ -55,7 +55,10 @@ public class ProductApiController implements ProductApi {
                 filterAndPageable.getFilter(),
                 filterAndPageable.getPageable()
         );
-        return products.stream().map(productMapper::map).collect(Collectors.toList());
+
+        List<ProductDto> result = products.stream().map(productMapper::map).collect(Collectors.toList());
+        log.info("GetAllByParams request result size: {}", requestParams.size());
+        return result;
     }
 
     @CrossOrigin
