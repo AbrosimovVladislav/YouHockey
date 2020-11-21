@@ -31,7 +31,6 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    @MeasurePerformance
     public List<Product> getAllByParameters(Map<String, String> requestParams, Pageable pageable) {
         return productRepo.findAllByParameters(requestParams, pageable, Product.class);
     }
