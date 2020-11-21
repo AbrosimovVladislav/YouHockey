@@ -14,7 +14,6 @@ public class ImageApiController implements ImageApi {
     private final ImageService imageService;
 
     @CrossOrigin
-    @MeasurePerformance
     @GetMapping(value = "/{id}", produces = MediaType.IMAGE_PNG_VALUE) // try jpg)))
     public ResponseEntity<byte[]> getProductImage(@PathVariable("id") long productId) {
         return ResponseEntity.of(imageService.getProductImage(productId));
