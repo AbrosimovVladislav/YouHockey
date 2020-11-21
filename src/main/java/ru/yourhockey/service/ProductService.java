@@ -6,6 +6,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.repo.ProductRepo;
+import ru.yourhockey.service.logging.MeasurePerformance;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class ProductService {
     private final ProductRepo productRepo;
     private final OfferService offerService;
 
+    @MeasurePerformance
     public List<Product> recalculateMinMaxPrice() {
         List<Product> all = productRepo.findAll();
         return all.stream()
@@ -29,6 +31,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @MeasurePerformance
     public List<Product> getAllByParameters(Map<String, String> requestParams, Pageable pageable) {
         return productRepo.findAllByParameters(requestParams, pageable, Product.class);
     }
@@ -41,6 +44,7 @@ public class ProductService {
         return productRepo.getOne(id);
     }
 
+    @MeasurePerformance
     public Product troubleTicketCreateProduct(Product product) {
         return productRepo.troubleTicketSaveOrUpdate(product);
     }

@@ -12,6 +12,7 @@ import ru.yourhockey.model.product_attributes.Age;
 import ru.yourhockey.service.BrandService;
 import ru.yourhockey.service.ProductService;
 import ru.yourhockey.service.TypeService;
+import ru.yourhockey.service.logging.MeasurePerformance;
 import ru.yourhockey.web.TypeNotFoundException;
 import ru.yourhockey.web.dto.MatcherProductDto;
 import ru.yourhockey.web.dto.ProductDto;
@@ -40,11 +41,12 @@ public class ProductApiController implements ProductApi {
     private static final int DEFAULT_PAGE_SIZE = 3000;
 
     @CrossOrigin()
+    @MeasurePerformance
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductDto> getAllByParams(@RequestParam Map<String, String> requestParams,
                                            @PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE_NUMBER) Pageable pageable) {
 
-        log.info("Incoming request. Params {}. Pageable {}",requestParams,pageable);
+        log.info("Incoming request. Params {}. Pageable {}", requestParams, pageable);
 
         FilterAndPageable filterAndPageable = new FilterAndPageable(requestParams, pageable);
         preparers.forEach(preparer -> preparer.prepare(filterAndPageable, Product.class));
@@ -57,6 +59,7 @@ public class ProductApiController implements ProductApi {
     }
 
     @CrossOrigin
+    @MeasurePerformance
     @PostMapping("/product")
     public Long createProduct(@RequestBody Map<String, String> body) {
         Product product = new Product()
@@ -70,6 +73,7 @@ public class ProductApiController implements ProductApi {
     }
 
     @CrossOrigin
+    @MeasurePerformance
     @GetMapping(value = "/allProducts", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MatcherProductDto>> getAll() {
         List<Product> products = productService.getAll();
@@ -77,6 +81,7 @@ public class ProductApiController implements ProductApi {
     }
 
     @CrossOrigin
+    @MeasurePerformance
     @GetMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto getById(@PathVariable long productId) {
         Product product = productService.getById(productId);
@@ -84,12 +89,9 @@ public class ProductApiController implements ProductApi {
     }
 
     @CrossOrigin
+    @MeasurePerformance
     @GetMapping("/products/search")
     public ResponseEntity<List<ProductDto>> search(@RequestParam String searchLine) {
         return ResponseEntity.ok(productMapper.mapList(productService.search(searchLine)));
-    }
-
-    public void updateCommitMethod(){
-        System.out.println("Hello");
     }
 }

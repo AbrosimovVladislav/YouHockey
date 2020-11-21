@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.yourhockey.model.MenuItem;
 import ru.yourhockey.service.MenuService;
+import ru.yourhockey.service.logging.MeasurePerformance;
 
 import java.util.List;
 
@@ -15,8 +16,9 @@ public class MenuApiController implements MenuApi {
 
     private final MenuService menuService;
 
-    @GetMapping("/menuItems")
     @CrossOrigin
+    @MeasurePerformance
+    @GetMapping("/menuItems")
     public List<MenuItem> menuItems() {
         return menuService.getMenuItems();
     }

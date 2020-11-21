@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.yourhockey.model.filtration.FilterItem;
 import ru.yourhockey.service.FilterItemService;
+import ru.yourhockey.service.logging.MeasurePerformance;
 import ru.yourhockey.web.dto.FilterItemDto;
 import ru.yourhockey.web.mapper.FilterItemMapper;
 
@@ -24,6 +25,7 @@ public class FilterApiController implements FilterApi {
     /*ToDo Выбрать колонку в которой лежат не строки и проверить работоспособность всей цепочки */
     /*ToDo Подумать над тем, мб пустить фильтер не по меню айтему а по всему тайпу */
     @CrossOrigin
+    @MeasurePerformance
     @GetMapping(value = "/product/filters/{menuItem}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FilterItemDto> getFilterItemsByMenuItem(@PathVariable String menuItem) {
         List<FilterItem> filterItems = filterItemService.getFiltersByMenuItem(menuItem);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Review;
 import ru.yourhockey.service.ReviewService;
+import ru.yourhockey.service.logging.MeasurePerformance;
 import ru.yourhockey.web.dto.ReviewDto;
 import ru.yourhockey.web.mapper.ReviewMapper;
 import ru.yourhockey.web.preparer.FilterAndPageable;
@@ -18,6 +19,7 @@ import java.util.List;
 
 
 @RestController
+@MeasurePerformance
 @RequiredArgsConstructor
 public class ReviewApiController implements ReviewApi {
 
