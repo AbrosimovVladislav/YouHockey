@@ -62,6 +62,14 @@ public class OfferApiController implements OfferApi {
         );
     }
 
+
+    //ToDo Investigate поучему сохраняется меньше чем приходит
+    //  private final OfferRepo offerRepo;
+    //  List<Offer> incomingCopy = new ArrayList<>(offers);
+    //  List<Offer> inDb = offerRepo.findAll();
+    //  incomingCopy.removeAll(inDb);
+    //  System.out.println(incomingCopy);
+    //  List<Offer> savedOffers = offerService.saveAll(incomingCopy);
     @MeasurePerformance
     @PostMapping(value = "/offers")
     public ResponseEntity<List<OfferDto>> receiveFinalOffers(@RequestBody List<OfferDto> body) {
