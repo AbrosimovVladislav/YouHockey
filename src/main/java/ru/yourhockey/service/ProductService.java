@@ -6,6 +6,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.repo.ProductRepo;
+import ru.yourhockey.service.client.TrustInfoClient;
 import ru.yourhockey.service.logging.MeasurePerformance;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductRepo productRepo;
     private final OfferService offerService;
+    private final TrustInfoClient trustInfoClient;
 
     @MeasurePerformance
     public List<Product> recalculateMinMaxPrice() {
@@ -45,7 +47,9 @@ public class ProductService {
 
     @MeasurePerformance
     public Product troubleTicketCreateProduct(Product product) {
-        return productRepo.troubleTicketSaveOrUpdate(product);
+        Product saved = productRepo.troubleTicketSaveOrUpdate(product);
+        trustInfoClient.saveToTrustInfo(saved);
+        return saved;
     }
 
     public List<Product> search(String searchLine) {
