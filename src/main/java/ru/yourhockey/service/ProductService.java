@@ -19,6 +19,7 @@ public class ProductService {
     private final ProductRepo productRepo;
     private final OfferService offerService;
     private final TrustInfoClient trustInfoClient;
+    private final ImageService imageService;
 
     @MeasurePerformance
     public List<Product> recalculateMinMaxPrice() {
@@ -47,6 +48,7 @@ public class ProductService {
 
     @MeasurePerformance
     public Product troubleTicketCreateProduct(Product product) {
+        imageService.updateImageLink(product);
         Product saved = productRepo.troubleTicketSaveOrUpdate(product);
         trustInfoClient.saveToTrustInfo(saved);
         return saved;
@@ -56,16 +58,16 @@ public class ProductService {
         List<Product> products = productRepo.findAll();
         return products.stream()
                 .map(p -> Pair.of(
-                    p,
-                    String.join(
-                        " ",
-                        List.of(
-                            p.getType().getShowName(),
-                            p.getBrand().getShortName(),
-                            p.getModel(),
-                            p.getAge().name()
+                        p,
+                        String.join(
+                                " ",
+                                List.of(
+                                        p.getType().getShowName(),
+                                        p.getBrand().getShortName(),
+                                        p.getModel(),
+                                        p.getAge().name()
+                                )
                         )
-                    )
                 ))
                 .filter(pair -> pair.getSecond().toUpperCase().contains(searchLine.toUpperCase()))
                 .map(Pair::getFirst)

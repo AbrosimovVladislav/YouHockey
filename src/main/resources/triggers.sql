@@ -1,0 +1,33 @@
+-- -- CREATE OR REPLACE FUNCTION insertNewRatingOnNewShop() RETURNS TRIGGER AS $shopTrigger$
+-- --     DECLARE
+-- --         i BIGINT;
+-- --     BEGIN
+-- --         IF NEW.rating_id IS NULL THEN
+-- --             INSERT INTO rating (value) VALUES (0) RETURNING rating_id into i;
+-- --             NEW.rating_id := i;
+-- --         END IF;
+-- --         RETURN NEW;
+-- --     END;
+-- -- $shopTrigger$ LANGUAGE plpgsql;;
+-- --
+-- -- DROP TRIGGER IF EXISTS shopTrigger ON shop;;
+-- -- CREATE TRIGGER shopTrigger BEFORE INSERT ON shop
+-- -- FOR EACH ROW
+-- -- EXECUTE FUNCTION insertNewRatingOnNewShop();;
+-- --
+-- -- CREATE OR REPLACE FUNCTION insertNewRatingOnNewProduct() RETURNS TRIGGER AS $productTrigger$
+-- --     DECLARE
+-- --         i BIGINT;
+-- --     BEGIN
+-- --         IF NEW.rating_id IS NULL THEN
+-- --             INSERT INTO rating (value) VALUES (0) RETURNING rating_id into i;
+-- --             NEW.rating_id := i;
+-- --         END IF;
+-- --         RETURN NEW;
+-- --     END;
+-- -- $productTrigger$ LANGUAGE plpgsql;;
+-- --
+-- -- DROP TRIGGER IF EXISTS productTrigger ON product;;
+-- -- CREATE TRIGGER productTrigger BEFORE INSERT ON product
+-- -- FOR EACH ROW
+-- -- EXECUTE FUNCTION insertNewRatingOnNewProduct();;
