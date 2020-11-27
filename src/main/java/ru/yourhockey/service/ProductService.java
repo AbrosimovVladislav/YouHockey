@@ -49,10 +49,13 @@ public class ProductService {
     @MeasurePerformance
     public Product troubleTicketCreateProduct(Product product) {
         imageService.updateImageLink(product);
+        product.setProductId(productRepo.getMaxProductId() + 1);
         Product saved = productRepo.troubleTicketSaveOrUpdate(product);
         trustInfoClient.saveToTrustInfo(saved);
         return saved;
     }
+
+
 
     public List<Product> search(String searchLine) {
         List<Product> products = productRepo.findAll();
