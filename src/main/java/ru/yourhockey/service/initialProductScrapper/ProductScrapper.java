@@ -12,7 +12,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.product.Product;
-import ru.yourhockey.model.product_attributes.Age;
 import ru.yourhockey.model.product_attributes.Brand;
 import ru.yourhockey.model.product_attributes.Type;
 import ru.yourhockey.repo.BrandRepo;
@@ -27,6 +26,7 @@ import java.util.stream.IntStream;
 
 @Slf4j
 @Component
+@Deprecated
 @RequiredArgsConstructor
 public class ProductScrapper implements InitializingBean {
 
@@ -126,23 +126,6 @@ public class ProductScrapper implements InitializingBean {
             return null;
         }
 
-        Age age = Age.UNDEFINED;
-        try {
-            age = Age.of(doc.getElementsByClass("props_list").get(0)
-                    .getElementsByClass("char_value")
-                    .get(0).getElementsByTag("span").get(0)
-                    .text().trim());
-            if(age == Age.UNDEFINED){
-                age = Age.of(getAgeFromName(doc.getElementsByClass("preview_text dotdot").get(0).text()));
-            }
-        } catch (Exception e) {
-            try {
-                age = Age.of(getAgeFromName(doc.getElementsByClass("preview_text dotdot").get(0).text()));
-            } catch (Exception er) {
-                log.error("Cant take age from product with url: {}", url);
-            }
-        }
-
         String description = "";
         try {
             description = doc.getElementsByClass("tabs_section").get(0)
@@ -174,7 +157,7 @@ public class ProductScrapper implements InitializingBean {
         String model = "";
         try {
             String name = doc.getElementsByClass("preview_text dotdot").get(0).text();
-            model = getModelFromProductFullName(name, brand.getShortName(), age.name(), type);
+            model = getModelFromProductFullName(name, brand.getShortName(), type);
         } catch (Exception e) {
             log.error("Cant take model from product with url: {}. This product will not be created", url);
             return null;
@@ -184,7 +167,6 @@ public class ProductScrapper implements InitializingBean {
                 .setModel(model)
                 .setBrand(brand)
                 .setType(type)
-                .setAge(age)
                 .setDescription(description)
                 .setCharacteristics(characteristics)
                 .setSrcImageLink(srcImageLink);
@@ -197,10 +179,9 @@ public class ProductScrapper implements InitializingBean {
         return product;
     }
 
-    private String getModelFromProductFullName(String fullName, String brandShortName, String age, Type type) {
+    private String getModelFromProductFullName(String fullName, String brandShortName, Type type) {
         String name = fullName.toUpperCase();
         name = name.replaceAll(brandShortName.toUpperCase(), "");
-        name = name.replaceAll(age.toUpperCase(), "");
 
         name = name.replaceAll(type.getUpper().toUpperCase(), "");
         if (type.getMedium() != null) {

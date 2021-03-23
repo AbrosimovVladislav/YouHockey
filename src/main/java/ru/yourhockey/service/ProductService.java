@@ -6,7 +6,6 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.repo.ProductRepo;
-import ru.yourhockey.service.client.TrustInfoClient;
 import ru.yourhockey.service.logging.MeasurePerformance;
 
 import java.util.List;
@@ -14,11 +13,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Deprecated
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepo productRepo;
     private final OfferService offerService;
-    private final TrustInfoClient trustInfoClient;
+//    private final TrustInfoClient trustInfoClient;
 
     @MeasurePerformance
     public List<Product> recalculateMinMaxPrice() {
@@ -48,7 +48,7 @@ public class ProductService {
     @MeasurePerformance
     public Product troubleTicketCreateProduct(Product product) {
         Product saved = productRepo.troubleTicketSaveOrUpdate(product);
-        trustInfoClient.saveToTrustInfo(saved);
+//        trustInfoClient.saveToTrustInfo(saved);
         return saved;
     }
 
@@ -56,16 +56,15 @@ public class ProductService {
         List<Product> products = productRepo.findAll();
         return products.stream()
                 .map(p -> Pair.of(
-                    p,
-                    String.join(
-                        " ",
-                        List.of(
-                            p.getType().getShowName(),
-                            p.getBrand().getShortName(),
-                            p.getModel(),
-                            p.getAge().name()
+                        p,
+                        String.join(
+                                " ",
+                                List.of(
+                                        p.getType().getShowName(),
+                                        p.getBrand().getShortName(),
+                                        p.getModel()
+                                )
                         )
-                    )
                 ))
                 .filter(pair -> pair.getSecond().toUpperCase().contains(searchLine.toUpperCase()))
                 .map(Pair::getFirst)

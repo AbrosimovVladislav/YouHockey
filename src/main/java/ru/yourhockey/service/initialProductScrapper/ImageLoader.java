@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@Deprecated
 @Component
 @RequiredArgsConstructor
 public class ImageLoader {
@@ -35,7 +36,7 @@ public class ImageLoader {
         // TODO: проход и скачивание по тем, у кого есть срцИмгЛинк, но нет имгЛинк
         for (Product product : products) {
             String type = product.getType().getShowName().replaceAll("/","-");
-            String imgName = product.getBrand().getShortName() + "_" + product.getModel() + "_" + product.getAge() + ".png";
+            String imgName = product.getBrand().getShortName() + "_" + product.getModel() + ".png";
             try {
                 var url = new URL("http://" + "opt-1274418.ssl.1c-bitrix-cdn.ru" + product.getSrcImageLink());
                 String imgDirName = System.getProperty("user.home") + "/" + imgDir;

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
 import ru.yourhockey.model.product.Product;
-import ru.yourhockey.model.product_attributes.Review;
 
 @Component
 public class SortPreparer implements Preparer {
@@ -33,8 +32,6 @@ public class SortPreparer implements Preparer {
             sortingProperty = Product.PRODUCT_MIN_PRICE;
         } else if (entityClass.isAssignableFrom(Offer.class)) {
             sortingProperty = Offer.OFFER_POPULARITY;
-        } else if (entityClass.isAssignableFrom(Review.class)) {
-            sortingProperty = Review.REVIEW_MARK;
         }
         return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(dir, sortingProperty));
     }

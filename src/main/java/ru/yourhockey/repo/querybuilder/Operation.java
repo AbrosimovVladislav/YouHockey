@@ -1,7 +1,5 @@
 package ru.yourhockey.repo.querybuilder;
 
-import ru.yourhockey.model.product_attributes.Age;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -11,7 +9,6 @@ public enum Operation {
     EQUALS {
         @Override
         public Predicate getPredicate(String paramName, String qbParamValue, CriteriaBuilder criteriaBuilder, Path path) {
-            if (paramName.equalsIgnoreCase("age")) return criteriaBuilder.equal(path, Age.of(qbParamValue));
             if (paramName.equalsIgnoreCase("inStock")) return criteriaBuilder.equal(path, Boolean.parseBoolean(qbParamValue));
             return criteriaBuilder.equal(path, qbParamValue);
         }
@@ -21,9 +18,7 @@ public enum Operation {
         public Predicate getPredicate(String paramName, String qbParamValue, CriteriaBuilder criteriaBuilder, Path path) {
             CriteriaBuilder.In inClause = criteriaBuilder.in(path);
             for (String value : qbParamValue.split(",")) {
-                if (paramName.equalsIgnoreCase("age")) {
-                    inClause.value(Age.of(value));
-                } else if (paramName.endsWith("Id") || paramName.endsWith("id")) {
+                if (paramName.endsWith("Id") || paramName.endsWith("id")) {
                     inClause.value(Long.parseLong(value));
                 } else inClause.value(value);
             }

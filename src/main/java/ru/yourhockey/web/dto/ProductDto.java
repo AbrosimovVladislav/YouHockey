@@ -15,12 +15,10 @@ public class ProductDto {
     private String model;
     private Brand brand;
     private Type type;
-    private String age;
     private String description;
     private String characteristics;
     private String link;
     private String imageLink;
-    //    private Rating rating;
     private Double minPrice;
     private Double maxPrice;
     private Integer offerQuantity;

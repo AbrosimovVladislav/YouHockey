@@ -61,14 +61,9 @@ public class FilterItemService {
     //Переделать в нормальный ранкинг для фильтров (каждый filter checkbox - enum)
     private List<String> sortBrandFilterItem(List<String> values) {
         List<String> sortedValues = new ArrayList<>(
-                List.of("BAUER",
-                        "CCM",
-                        "WARRIOR",
-                        "FISCHER",
-                        "EASTON",
-                        "REEBOK",
-                        "MAD GUY",
-                        "HOWIES")
+                List.of("Brand1",
+                        "Brand2",
+                        "Brand3")
         );
         values.stream()
                 .map(String::toUpperCase)

@@ -25,11 +25,6 @@ import static ru.yourhockey.model.shop.Shop.SHOP_ID;
 public class Offer implements BasicEntity {
     public static final String OFFER_ID = "offerId";
     public static final String OFFER_TABLE = "offer";
-    public static final String OFFER_PRICE = "price";
-    public static final String OFFER_SALE = "sale";
-    public static final String OFFER_IN_STOCK = "inStock";
-    public static final String OFFER_ADDITIONAL_INFO = "additionalInfo";
-    public static final String OFFER_LINK = "link";
     public static final String OFFER_POPULARITY = "popularity";
 
     @Id
@@ -45,19 +40,13 @@ public class Offer implements BasicEntity {
     @JoinColumn(name = SHOP_ID, nullable = false)
     private Shop shop;
 
-    @Column(name = OFFER_PRICE, nullable = false)
     @Min(value = 0, message = "Offer price cannot be lower than 0")
     private double price;
-
-    @Column(name = OFFER_IN_STOCK, nullable = false)
     private boolean inStock;
-
-    @Column(name = OFFER_LINK, nullable = false)
     private String link;
 
     @Min(0)
     @Max(1)
-    @Column(name = OFFER_POPULARITY, nullable = false)
     private double popularity;
 
     @SuppressWarnings("unused")

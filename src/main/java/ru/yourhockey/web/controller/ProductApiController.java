@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yourhockey.model.product.Product;
-import ru.yourhockey.model.product_attributes.Age;
 import ru.yourhockey.service.BrandService;
 import ru.yourhockey.service.ProductService;
 import ru.yourhockey.service.TypeService;
@@ -69,7 +68,6 @@ public class ProductApiController implements ProductApi {
                 .setModel(body.get("model"))
                 .setBrand(brandService.getByShortName(body.get("brandShortName")))
                 .setType(typeService.findByShowName(body.get("typeShowName")).orElseThrow(TypeNotFoundException::new))
-                .setAge(Age.of(body.get("age")))
                 .setDescription(body.get("description"))
                 .setSrcImageLink(body.get("srcImageLink"));
         return productService.troubleTicketCreateProduct(product).getProductId();

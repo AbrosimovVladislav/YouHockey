@@ -10,6 +10,7 @@ import ru.yourhockey.model.filtration.KeyPath;
 import java.util.List;
 
 @Component
+@Deprecated
 @Profile("!test")
 @RequiredArgsConstructor
 public class DbFiller implements InitializingBean {

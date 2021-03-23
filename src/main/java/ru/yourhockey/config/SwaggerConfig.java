@@ -22,7 +22,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .paths(PathSelectors.ant("/*"))
-                .apis(basePackage("ru.yourhockey.web.controller"))
+                .apis(basePackage("ru.gunmarket.web.controller"))
                 .build()
                 .apiInfo(apiDetails());
     }
@@ -30,10 +30,10 @@ public class SwaggerConfig {
     private ApiInfo apiDetails() {
         return new ApiInfo(
                 "Aggregator service API",
-                "Aggregator Service BackEnd app. Service for Hockey Equipment Aggregator 'Your Hockey'",
+                "Aggregator Service BackEnd app. Service for Gun Equipment Aggregator 'Gun Market'",
                 "0.1",
                 "No terms of use",
-                new Contact("Your Hockey", "http://yourhockey.ru", "-"),
+                new Contact("Gun MArket", "http://gunmarket.ru", "-"),
                 "API License",
                 "-",
                 Collections.emptyList()
