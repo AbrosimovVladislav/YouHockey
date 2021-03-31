@@ -2,11 +2,11 @@ package ru.yourhockey.model.product;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import ru.yourhockey.model.BasicEntity;
 import ru.yourhockey.model.offer.Offer;
-import ru.yourhockey.model.product_attributes.Brand;
-import ru.yourhockey.model.product_attributes.Type;
+import ru.yourhockey.model.product_attributes.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -15,6 +15,16 @@ import java.util.Set;
 
 import static ru.yourhockey.model.product.Product.PRODUCT_TABLE;
 import static ru.yourhockey.model.product_attributes.Brand.BRAND_ID;
+import static ru.yourhockey.model.product_attributes.Caliber.CALIBER_ID;
+import static ru.yourhockey.model.product_attributes.ChargeType.CHARGE_TYPE_ID;
+import static ru.yourhockey.model.product_attributes.Color.COLOR_ID;
+import static ru.yourhockey.model.product_attributes.Magnification.MAGNIFICATION_ID;
+import static ru.yourhockey.model.product_attributes.Material.MATERIAL_ID;
+import static ru.yourhockey.model.product_attributes.MountType.MOUNT_TYPE_ID;
+import static ru.yourhockey.model.product_attributes.NumberOfShot.NUMBER_OF_SHOT_ID;
+import static ru.yourhockey.model.product_attributes.PrincipleOfOperation.PRINCIPLE_OF_OPERATION_ID;
+import static ru.yourhockey.model.product_attributes.ScrewThread.SCREW_THREAD_ID;
+import static ru.yourhockey.model.product_attributes.TuningKind.TUNING_KIND_ID;
 import static ru.yourhockey.model.product_attributes.Type.TYPE_ID;
 
 
@@ -23,6 +33,7 @@ import static ru.yourhockey.model.product_attributes.Type.TYPE_ID;
 @Accessors(chain = true)
 @Getter
 @Setter
+@ToString(exclude = "offer")
 public class Product implements BasicEntity {
     public static final String PRODUCT_TABLE = "product";
     public static final String PRODUCT_ID = "productId";
@@ -52,6 +63,58 @@ public class Product implements BasicEntity {
     @JoinColumn(name = TYPE_ID, nullable = false)
     private Type type;
 
+    @ManyToOne
+    @JoinColumn(name = CALIBER_ID, nullable = false)
+    private Caliber caliber;
+
+    @ManyToOne
+    @JoinColumn(name = PRINCIPLE_OF_OPERATION_ID, nullable = false)
+    private PrincipleOfOperation principleOfOperation;
+
+    @ManyToOne
+    @JoinColumn(name = CHARGE_TYPE_ID, nullable = false)
+    private ChargeType chargeType;
+
+    @ManyToOne
+    @JoinColumn(name = NUMBER_OF_SHOT_ID, nullable = false)
+    private NumberOfShot numberOfShot;
+
+    @ManyToOne
+    @JoinColumn(name = TUNING_KIND_ID, nullable = false)
+    private TuningKind tuningKind;
+
+    @ManyToOne
+    @JoinColumn(name = COLOR_ID, nullable = false)
+    private Color color;
+
+    @ManyToOne
+    @JoinColumn(name = MATERIAL_ID, nullable = false)
+    private Material material;
+
+    @ManyToOne
+    @JoinColumn(name = SCREW_THREAD_ID, nullable = false)
+    private ScrewThread screwThread;
+
+    @ManyToOne
+    @JoinColumn(name = MOUNT_TYPE_ID, nullable = false)
+    private MountType mountType;
+
+    @ManyToOne
+    @JoinColumn(name = MAGNIFICATION_ID, nullable = false)
+    private Magnification magnification;
+
+    private String weight;
+
+    private String barrelLength;
+
+    private String bulletMass;
+
+    @Deprecated(since = "Продумать систему совместимости")
+    private String compatibility;
+
+    private String capacity;
+
+    private String length;
     /**
      * Description of product. EX. 'Почувствуйте анатомическую форму нового налокотника Supreme 1S благодаря комп...'
      */
@@ -78,25 +141,4 @@ public class Product implements BasicEntity {
     @Min(value = 0, message = "Product minPrice cannot be lower than 0")
     private Double minPrice;
     private Double maxPrice;
-
-    @Column(nullable = false, columnDefinition = "int default 0")
-    private Integer reviewCount = 0;
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId=" + productId +
-                ", model='" + model + '\'' +
-                ", brand=" + (brand != null ? brand.getShortName() : "null") +
-                ", type=" + (type != null ? type.getShowName() : "null") +
-                ", description='" + description + '\'' +
-                ", characteristics='" + characteristics + '\'' +
-                ", link='" + link + '\'' +
-                ", srcImageLink='" + srcImageLink + '\'' +
-                ", imageLink='" + imageLink + '\'' +
-                ", minPrice=" + minPrice +
-                ", maxPrice=" + maxPrice +
-                ", reviewCount=" + reviewCount +
-                '}';
-    }
 }
