@@ -20,8 +20,8 @@ public class ProductScrapperTestController {
     private final MirOhotyScrapper mirOhotyScrapper;
 
     @GetMapping("/mirohoty")
-    public Product mirohoty() {
-        return mirOhotyScrapper.productPage("https://www.huntworld.ru/catalog/okhota_i_sportivnaya_strelba/okhotniche_oruzhie/gladkostvolnye_ruzhya/karabin_kk_sayga_tg2_366tkm/",null);
+    public List<Product> mirohoty() {
+        return mirOhotyScrapper.categoryPage("https://www.huntworld.ru/catalog/okhota_i_sportivnaya_strelba/okhotniche_oruzhie/",null);
     }
 
     @GetMapping("/scrapProducts")

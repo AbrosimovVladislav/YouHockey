@@ -23,7 +23,7 @@ spring:
   datasource:
     username: postgres
     password: root
-    url: jdbc:postgresql://localhost:5432/yourhockey
+    url: jdbc:postgresql://localhost:5432/gunmarket
     driver-class-name: org.postgresql.Driver
     initialization-mode: always
     separator: ;;

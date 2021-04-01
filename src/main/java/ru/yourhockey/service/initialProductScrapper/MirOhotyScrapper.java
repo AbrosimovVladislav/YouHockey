@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -52,8 +53,26 @@ public class MirOhotyScrapper implements InitializingBean {
         return null;
     }
 
-    public List<Product> categoryPage() {
-        return null;
+    public List<Product> categoryPage(String categoryPageLink, Type type) {
+        Document doc;
+        try {
+            doc = Jsoup.connect(categoryPageLink).get();
+        } catch (IOException e) {
+            log.error("Failed to get product page with url {}", categoryPageLink);
+            throw new RuntimeException("Failed to get product page with url " + categoryPageLink);
+        }
+
+        List<String> productLinks = doc.getElementsByClass("cards js-product-view table-view").get(0)
+                .getElementsByClass("middle-block").stream()
+                .map(e -> e.getElementsByTag("a").get(0).attr("href"))
+                .map(e -> "https://www.huntworld.ru" + e)
+                .collect(Collectors.toUnmodifiableList());
+
+        List<Product> products = productLinks.stream()
+                .map(prodLink -> productPage(prodLink, type))
+                .collect(Collectors.toUnmodifiableList());
+
+        return products;
     }
 
     public Product productPage(String url, Type type) {
@@ -77,6 +96,10 @@ public class MirOhotyScrapper implements InitializingBean {
                 text = text.replaceAll("Модель: ", "");
                 product.setModel(text);
             }
+            if (text.contains("Серия")) {
+                text = text.replaceAll("Серия: ", "");
+                product.setModel(product.getModel() + " " + text);
+            }
             if (text.contains("Бренд")) {
                 text = text.replaceAll("Бренд: ", "");
                 product.setBrand(brandRepo.findByShortName(text));
@@ -94,10 +117,11 @@ public class MirOhotyScrapper implements InitializingBean {
                 product.setBarrelLength(text);
             }
             if (text.contains("Принцип")) {
-                text = text.replaceAll("Принцип действия ", "");
                 product.setPrincipleOfOperation(principleOfOperationRepo.findByName(specificationLine.getElementsByClass("element_property_value").text()));
             }
         });
+
+        product.setType(type);
 
         return product;
     }
