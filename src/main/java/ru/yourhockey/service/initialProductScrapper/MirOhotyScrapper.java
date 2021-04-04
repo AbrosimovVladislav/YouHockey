@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Type;
@@ -21,7 +22,9 @@ import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j
@@ -34,23 +37,39 @@ public class MirOhotyScrapper implements InitializingBean {
     private final PrincipleOfOperationRepo principleOfOperationRepo;
 
     Map<String, String> categories;
+    Map<String, Integer> pageNumbers;
 
     @Override
     public void afterPropertiesSet() {
         categories = fromJson("yourhockeyold/static/product-scrapper/categories.json");
+
+        pageNumbers = fromJson("yourhockeyold/static/product-scrapper/pageCount.json").entrySet().stream()
+                .map(e -> Pair.of(e.getKey(),parseInt(e.getValue())))
+                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
     }
 
     public List<Product> scrap() {
         List<Product> products = categories.entrySet().stream()
-                .map(e -> category(e.getKey(), e.getValue()))
+                .map(e -> category(e.getKey(), null))
                 .flatMap(List::stream)
                 .collect(toList());
 
         return products;
     }
 
-    public List<Product> category(String link, String category) {
-        return null;
+    public int numberOfPages(String categoryLink) {
+       return pageNumbers.getOrDefault(categoryLink,1);
+    }
+
+    public List<Product> category(String link, Type type) {
+
+        int numberOfPages = numberOfPages(link);
+
+        return IntStream.range(1, numberOfPages+1)
+                .mapToObj(i -> link + "?PAGEN_1=" + i)
+                .map(categoryPageLink -> categoryPage(categoryPageLink, type))
+                .flatMap(List::stream)
+                .collect(toList());
     }
 
     public List<Product> categoryPage(String categoryPageLink, Type type) {
@@ -86,20 +105,18 @@ public class MirOhotyScrapper implements InitializingBean {
 
         Product product = new Product();
 
+        String model = doc.getElementsByClass("item-head").get(0).getElementsByTag("h1").get(0).text();
+        product.setModel(model);
+
+        String imageLink = "https://www.huntworld.ru/"+doc.getElementsByClass("swiper-wrapper").get(0).getElementsByTag("img").get(0).attr("src");
+        product.setSrcImageLink(imageLink);
+
         Element element = doc.getElementsByClass("block-detail").get(0);
         Elements specifications = element.getElementsByClass("specifications").get(0)
                 .getElementsByTag("tr");
 
         specifications.forEach(specificationLine -> {
             String text = specificationLine.text();
-            if (text.contains("Модель")) {
-                text = text.replaceAll("Модель: ", "");
-                product.setModel(text);
-            }
-            if (text.contains("Серия")) {
-                text = text.replaceAll("Серия: ", "");
-                product.setModel(product.getModel() + " " + text);
-            }
             if (text.contains("Бренд")) {
                 text = text.replaceAll("Бренд: ", "");
                 product.setBrand(brandRepo.findByShortName(text));

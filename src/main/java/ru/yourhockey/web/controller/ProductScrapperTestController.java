@@ -21,7 +21,7 @@ public class ProductScrapperTestController {
 
     @GetMapping("/mirohoty")
     public List<Product> mirohoty() {
-        return mirOhotyScrapper.categoryPage("https://www.huntworld.ru/catalog/okhota_i_sportivnaya_strelba/okhotniche_oruzhie/",null);
+        return mirOhotyScrapper.category("https://www.huntworld.ru/catalog/okhota_i_sportivnaya_strelba/okhotniche_oruzhie/gladkostvolnye_ruzhya/",null);
     }
 
     @GetMapping("/scrapProducts")
