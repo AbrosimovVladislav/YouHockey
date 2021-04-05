@@ -64,43 +64,43 @@ public class Product implements BasicEntity {
     private Type type;
 
     @ManyToOne
-    @JoinColumn(name = CALIBER_ID, nullable = false)
+    @JoinColumn(name = CALIBER_ID)
     private Caliber caliber;
 
     @ManyToOne
-    @JoinColumn(name = PRINCIPLE_OF_OPERATION_ID, nullable = false)
+    @JoinColumn(name = PRINCIPLE_OF_OPERATION_ID)
     private PrincipleOfOperation principleOfOperation;
 
     @ManyToOne
-    @JoinColumn(name = CHARGE_TYPE_ID, nullable = false)
+    @JoinColumn(name = CHARGE_TYPE_ID)
     private ChargeType chargeType;
 
     @ManyToOne
-    @JoinColumn(name = NUMBER_OF_SHOT_ID, nullable = false)
+    @JoinColumn(name = NUMBER_OF_SHOT_ID)
     private NumberOfShot numberOfShot;
 
     @ManyToOne
-    @JoinColumn(name = TUNING_KIND_ID, nullable = false)
+    @JoinColumn(name = TUNING_KIND_ID)
     private TuningKind tuningKind;
 
     @ManyToOne
-    @JoinColumn(name = COLOR_ID, nullable = false)
+    @JoinColumn(name = COLOR_ID)
     private Color color;
 
     @ManyToOne
-    @JoinColumn(name = MATERIAL_ID, nullable = false)
+    @JoinColumn(name = MATERIAL_ID)
     private Material material;
 
     @ManyToOne
-    @JoinColumn(name = SCREW_THREAD_ID, nullable = false)
+    @JoinColumn(name = SCREW_THREAD_ID)
     private ScrewThread screwThread;
 
     @ManyToOne
-    @JoinColumn(name = MOUNT_TYPE_ID, nullable = false)
+    @JoinColumn(name = MOUNT_TYPE_ID)
     private MountType mountType;
 
     @ManyToOne
-    @JoinColumn(name = MAGNIFICATION_ID, nullable = false)
+    @JoinColumn(name = MAGNIFICATION_ID)
     private Magnification magnification;
 
     private String weight;

@@ -2,6 +2,7 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = Caliber.CALIBER_TABLE)
+@ToString(exclude = "product")
 public class Caliber {
 
     public static final String CALIBER_ID = "caliberId";

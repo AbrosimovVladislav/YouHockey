@@ -2,6 +2,7 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import static ru.yourhockey.model.product_attributes.TuningKind.TUNING_KIND_TABL
 @Data
 @Entity
 @Table(name = TUNING_KIND_TABLE)
+@ToString(exclude = "product")
 public class TuningKind {
 
     public static final String TUNING_KIND_ID = "tuningKindId";

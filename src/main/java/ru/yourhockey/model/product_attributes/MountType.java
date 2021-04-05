@@ -2,6 +2,7 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import static ru.yourhockey.model.product_attributes.MountType.MOUNT_TYPE_TABLE;
 @Data
 @Entity
 @Table(name = MOUNT_TYPE_TABLE)
+@ToString(exclude = "product")
 public class MountType {
 
     public static final String MOUNT_TYPE_ID = "mountTypeId";

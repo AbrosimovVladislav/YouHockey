@@ -2,6 +2,7 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import static ru.yourhockey.model.product_attributes.ScrewThread.SCREW_THREAD_TA
 @Data
 @Entity
 @Table(name = SCREW_THREAD_TABLE)
+@ToString(exclude = "product")
 public class ScrewThread {
 
     public static final String SCREW_THREAD_ID = "screwThreadId";

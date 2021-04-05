@@ -2,6 +2,7 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import static ru.yourhockey.model.product_attributes.Color.COLOR_TABLE;
 @Data
 @Entity
 @Table(name = COLOR_TABLE)
+@ToString(exclude = "product")
 public class Color {
 
     public static final String COLOR_ID = "colorId";

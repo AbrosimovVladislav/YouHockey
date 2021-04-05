@@ -13,9 +13,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.product.Product;
 import ru.yourhockey.model.product_attributes.Type;
-import ru.yourhockey.repo.BrandRepo;
-import ru.yourhockey.repo.CaliberRepo;
-import ru.yourhockey.repo.PrincipleOfOperationRepo;
+import ru.yourhockey.repo.*;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -32,25 +30,27 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class MirOhotyScrapper implements InitializingBean {
 
+    private final ProductRepo productRepo;
     private final BrandRepo brandRepo;
     private final CaliberRepo caliberRepo;
     private final PrincipleOfOperationRepo principleOfOperationRepo;
+    private final TypeRepo typeRepo;
 
     Map<String, String> categories;
     Map<String, Integer> pageNumbers;
 
     @Override
     public void afterPropertiesSet() {
-        categories = fromJson("yourhockeyold/static/product-scrapper/categories.json");
+        categories = fromJson("product-scrapper/categories.json");
 
-        pageNumbers = fromJson("yourhockeyold/static/product-scrapper/pageCount.json").entrySet().stream()
+        pageNumbers = fromJson("product-scrapper/pageCount.json").entrySet().stream()
                 .map(e -> Pair.of(e.getKey(),parseInt(e.getValue())))
                 .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
     }
 
     public List<Product> scrap() {
         List<Product> products = categories.entrySet().stream()
-                .map(e -> category(e.getKey(), null))
+                .map(e -> category(e.getKey(), typeRepo.findByShowName(e.getValue()).get()))
                 .flatMap(List::stream)
                 .collect(toList());
 
@@ -109,6 +109,7 @@ public class MirOhotyScrapper implements InitializingBean {
         product.setModel(model);
 
         String imageLink = "https://www.huntworld.ru/"+doc.getElementsByClass("swiper-wrapper").get(0).getElementsByTag("img").get(0).attr("src");
+        imageLink = imageLink.replaceAll("320_320_1","720_720_1");
         product.setSrcImageLink(imageLink);
 
         Element element = doc.getElementsByClass("block-detail").get(0);
@@ -139,6 +140,13 @@ public class MirOhotyScrapper implements InitializingBean {
         });
 
         product.setType(type);
+
+        try {
+            productRepo.saveOrUpdate(product);
+            log.info("Saving " + product);
+        } catch (Exception e){
+            log.error("Something wrong with savind to db --- " + e.getMessage());
+        }
 
         return product;
     }

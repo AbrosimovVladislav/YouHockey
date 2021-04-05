@@ -2,6 +2,7 @@ package ru.yourhockey.model.product_attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import ru.yourhockey.model.product.Product;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import static ru.yourhockey.model.product_attributes.PrincipleOfOperation.PRINCI
 @Data
 @Entity
 @Table(name = PRINCIPLE_OF_OPERATION_TABLE)
+@ToString(exclude = "product")
 public class PrincipleOfOperation {
 
     public static final String PRINCIPLE_OF_OPERATION_ID = "principleOfOperationId";
