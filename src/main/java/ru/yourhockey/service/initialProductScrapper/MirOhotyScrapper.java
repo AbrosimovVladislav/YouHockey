@@ -12,13 +12,16 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 import ru.yourhockey.model.product.Product;
+import ru.yourhockey.model.product_attributes.Caliber;
 import ru.yourhockey.model.product_attributes.Type;
 import ru.yourhockey.repo.*;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -38,14 +41,17 @@ public class MirOhotyScrapper implements InitializingBean {
 
     Map<String, String> categories;
     Map<String, Integer> pageNumbers;
+    List<Caliber> availableCalibers;
 
     @Override
     public void afterPropertiesSet() {
         categories = fromJson("product-scrapper/categories.json");
 
         pageNumbers = fromJson("product-scrapper/pageCount.json").entrySet().stream()
-                .map(e -> Pair.of(e.getKey(),parseInt(e.getValue())))
+                .map(e -> Pair.of(e.getKey(), parseInt(e.getValue())))
                 .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
+
+        availableCalibers = caliberRepo.findAll();
     }
 
     public List<Product> scrap() {
@@ -58,14 +64,14 @@ public class MirOhotyScrapper implements InitializingBean {
     }
 
     public int numberOfPages(String categoryLink) {
-       return pageNumbers.getOrDefault(categoryLink,1);
+        return pageNumbers.getOrDefault(categoryLink, 1);
     }
 
     public List<Product> category(String link, Type type) {
 
         int numberOfPages = numberOfPages(link);
 
-        return IntStream.range(1, numberOfPages+1)
+        return IntStream.range(1, numberOfPages + 1)
                 .mapToObj(i -> link + "?PAGEN_1=" + i)
                 .map(categoryPageLink -> categoryPage(categoryPageLink, type))
                 .flatMap(List::stream)
@@ -108,8 +114,8 @@ public class MirOhotyScrapper implements InitializingBean {
         String model = doc.getElementsByClass("item-head").get(0).getElementsByTag("h1").get(0).text();
         product.setModel(model);
 
-        String imageLink = "https://www.huntworld.ru/"+doc.getElementsByClass("swiper-wrapper").get(0).getElementsByTag("img").get(0).attr("src");
-        imageLink = imageLink.replaceAll("320_320_1","720_720_1");
+        String imageLink = "https://www.huntworld.ru/" + doc.getElementsByClass("swiper-wrapper").get(0).getElementsByTag("img").get(0).attr("src");
+        imageLink = imageLink.replaceAll("320_320_1", "720_720_1");
         product.setSrcImageLink(imageLink);
 
         Element element = doc.getElementsByClass("block-detail").get(0);
@@ -124,7 +130,20 @@ public class MirOhotyScrapper implements InitializingBean {
             }
             if (text.contains("Калибр")) {
                 text = text.replaceAll("Калибр: ", "");
-                product.setCaliber(caliberRepo.findByName(specificationLine.getElementsByClass("element_property_value").text()));
+                Caliber caliber = caliberRepo.findByName(specificationLine.getElementsByClass("element_property_value").text());
+                if (caliber == null) {
+                    Optional<Caliber> optCaliber = availableCalibers.stream()
+                            .filter(currCaliber -> {
+                                Optional<String> caliberName = Arrays.stream(model.split(" "))
+                                        .filter(modelPart -> modelPart.equals(currCaliber.getName()))
+                                        .findFirst();
+                                return caliberName.isPresent();
+                            }).findFirst();
+                    if (optCaliber.isPresent()) {
+                        caliber = optCaliber.get();
+                    }
+                }
+                product.setCaliber(caliber);
             }
             if (text.contains("Вес")) {
                 text = text.replaceAll("[^0-9]", "");
@@ -144,7 +163,7 @@ public class MirOhotyScrapper implements InitializingBean {
         try {
             productRepo.saveOrUpdate(product);
             log.info("Saving " + product);
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("Something wrong with savind to db --- " + e.getMessage());
         }
 
