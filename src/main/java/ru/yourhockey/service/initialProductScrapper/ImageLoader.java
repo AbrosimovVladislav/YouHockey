@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Deprecated
 @Component
 @RequiredArgsConstructor
 public class ImageLoader {
@@ -38,7 +37,7 @@ public class ImageLoader {
             String type = product.getType().getShowName().replaceAll("/","-");
             String imgName = product.getBrand().getShortName() + "_" + product.getModel() + ".png";
             try {
-                var url = new URL("http://" + "opt-1274418.ssl.1c-bitrix-cdn.ru" + product.getSrcImageLink());
+                var url = new URL(product.getSrcImageLink());
                 String imgDirName = System.getProperty("user.home") + "/" + imgDir;
                 if (Files.notExists(Paths.get(imgDirName)))
                     Files.createDirectory(Paths.get(imgDirName)); // redundant perhaps

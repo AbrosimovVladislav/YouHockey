@@ -24,6 +24,8 @@ public class ChargeType {
     @Column(name = CHARGE_TYPE_ID, length = 8, nullable = false)
     private Long chargeTypeId;
 
+    private String name;
+
     @JsonIgnore
     @OneToMany(mappedBy = CHARGE_TYPE_TABLE)
     private Set<Product> product;

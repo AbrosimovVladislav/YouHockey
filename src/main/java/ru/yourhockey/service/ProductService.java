@@ -13,12 +13,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@Deprecated
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepo productRepo;
     private final OfferService offerService;
-//    private final TrustInfoClient trustInfoClient;
 
     @MeasurePerformance
     public List<Product> recalculateMinMaxPrice() {
@@ -48,7 +46,6 @@ public class ProductService {
     @MeasurePerformance
     public Product troubleTicketCreateProduct(Product product) {
         Product saved = productRepo.troubleTicketSaveOrUpdate(product);
-//        trustInfoClient.saveToTrustInfo(saved);
         return saved;
     }
 

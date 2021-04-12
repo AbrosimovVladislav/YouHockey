@@ -114,7 +114,7 @@ public class MirOhotyScrapper implements InitializingBean {
         String model = doc.getElementsByClass("item-head").get(0).getElementsByTag("h1").get(0).text();
         product.setModel(model);
 
-        String imageLink = "https://www.huntworld.ru/" + doc.getElementsByClass("swiper-wrapper").get(0).getElementsByTag("img").get(0).attr("src");
+        String imageLink = "https://www.huntworld.ru" + doc.getElementsByClass("swiper-wrapper").get(0).getElementsByTag("img").get(0).attr("src");
         imageLink = imageLink.replaceAll("320_320_1", "720_720_1");
         product.setSrcImageLink(imageLink);
 

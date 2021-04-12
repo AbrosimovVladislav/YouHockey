@@ -36,12 +36,13 @@ public class FilterItemService {
     private void determineValues(FilterItem filterItem) {
         KeyPath keyPath = filterItem.getKeyPath();
         List<String> values = filterItemRepo.selectFromDistinct(keyPath.getTargetParam(), keyPath.getTargetEntity());
+        values.remove(null);
         if (filterItem.getName().equalsIgnoreCase("Брэнд")) {
             values = sortBrandFilterItem(values);
         }
-        if(filterItem.getName().equalsIgnoreCase("Возраст")){
-            values = List.of("SR","INT","JR","YTH");
-        }
+//        if(filterItem.getName().equalsIgnoreCase("Возраст")){
+//            values = List.of("SR","INT","JR","YTH");
+//        }
         FilterItem.FilterType type = filterItem.getType();
 
         switch (type) {
@@ -73,6 +74,9 @@ public class FilterItemService {
     }
 
     private List<String> getMinMax(List<String> values) {
+        if(values.isEmpty()){
+            return List.of("0","0");
+        }
         double min = Double.MAX_VALUE;
         double max = 0.;
         for (String value : values) {
